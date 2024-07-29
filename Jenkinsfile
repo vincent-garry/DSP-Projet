@@ -5,7 +5,7 @@ pipeline {
         // Définir des variables d'environnement
         DOCKER_IMAGE = "${env.BRANCH_NAME}-app"
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
-        APP_PORT = "81" // Défini le port utilisé par ton application
+        APP_PORT = "81" // Ports alloués pour HTML CSS 81 à 181
     }
 
     stages {
