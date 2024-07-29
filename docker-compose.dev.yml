@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  java-app:
+    build:
+      context: .
+      dockerfile: Dockerfile # Utilisez Dockerfile-dev si vous avez un Dockerfile de développement
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - database
+
+  database:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-data:
