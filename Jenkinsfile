@@ -4,7 +4,7 @@ pipeline {
     environment {
         // Configure Docker as needed
         DOCKER_IMAGE = "html-css-app-dev"
-        DOCKER_COMPOSE_FILE = ""
+        DOCKER_COMPOSE_FILE = "docker-composer.yml"
     }
 
     stages {
