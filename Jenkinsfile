@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     echo "Deploying using ${DOCKER_COMPOSE_FILE}"
-                    sh "sudo docker-compose -f ${DOCKER_COMPOSE_FILE} up -d"
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} up -d"
                 }
             }
         }
