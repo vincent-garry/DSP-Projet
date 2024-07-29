@@ -2,9 +2,10 @@ pipeline {
     agent any
 
     environment {
-        // Configure Docker as needed
-        DOCKER_IMAGE = "html-css-app-dev"
+        // Définir des variables d'environnement
+        DOCKER_IMAGE = "${env.BRANCH_NAME}-app"
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
+        APP_PORT = "81" // Défini le port utilisé par ton application
     }
 
     stages {
@@ -18,7 +19,23 @@ pipeline {
             steps {
                 script {
                     echo "Building Docker image: ${DOCKER_IMAGE}"
-                    sh "sudo docker build -t ${DOCKER_IMAGE} ."
+                    sh "docker build -t ${DOCKER_IMAGE} ."
+                }
+            }
+        }
+
+        stage('Clean Up Old Containers') {
+            steps {
+                script {
+                    echo "Stopping and removing old containers using port ${APP_PORT}"
+                    sh '''
+                        # Trouver et arrêter les conteneurs utilisant le port spécifié
+                        containers=$(docker ps -q --filter "publish=${APP_PORT}")
+                        if [ ! -z "$containers" ]; then
+                            docker stop $containers
+                            docker rm $containers
+                        fi
+                    '''
                 }
             }
         }
@@ -35,7 +52,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    // Add steps to run your tests if applicable
+                    // Ajouter des étapes pour exécuter des tests si nécessaire
                     echo "Running tests..."
                 }
             }
