@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: DSPProject2024
+      MYSQL_DATABASE: applications
+    ports:
+      - "3306:3306"
+
+  html-css-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.html-css
+    ports:
+      - "8081:80"
+
+  nodejs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.nodejs
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: mysql-db
+      DB_USER: root
+      DB_PASSWORD: DSPProject2024
+      DB_NAME: nodejs
+
+  java-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.java
+    ports:
+      - "8082:8080"
+    environment:
+      DB_HOST: mysql-db
+      DB_USER: root
+      DB_PASSWORD: DSPProject2024
+      DB_NAME: java
+
+  php-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    ports:
+      - "8083:80"
+    environment:
+      DB_HOST: mysql-db
+      DB_USER: root
+      DB_PASSWORD: DSPProject2024
+      DB_NAME: php
+
+  python-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    ports:
+      - "5000:5000"
+    environment:
+      DB_HOST: mysql-db
+      DB_USER: root
+      DB_PASSWORD: DSPProject2024
+      DB_NAME: python
+
+  ruby-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.ruby
+    ports:
+      - "3001:3000"
+    environment:
+      DB_HOST: mysql-db
+      DB_USER: root
+      DB_PASSWORD: DSPProject2024
+      DB_NAME: ruby
+
+  swift-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.swift
+    ports:
+      - "8084:8080"
