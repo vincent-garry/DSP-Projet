@@ -59,21 +59,20 @@ pipeline {
                 }
             }
         }
-
-        stage('Store Test Reports') {
-            steps {
-                script {
-                    // Stocke les rapports de test si nécessaire
-                    echo "Storing test reports..."
-                    archiveArtifacts artifacts: '**/test-reports/*.xml', allowEmptyArchive: true
-                }
-            }
-        }
     }
 
     post {
         always {
             cleanWs()
+            mail to: 'your-email@example.com',
+             subject: "Build ${currentBuild.fullDisplayName}",
+             body: "Build ${currentBuild.fullDisplayName} finished with status: ${currentBuild.result}"
+        }
+        success {
+        echo 'Build succeeded'
+        }
+        failure {
+            echo 'Build failed'
         }
     }
 }
