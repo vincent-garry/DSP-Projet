@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     echo "Building Docker image: ${DOCKER_IMAGE}"
-                    sh "docker build -t ${DOCKER_IMAGE} ."
+                    sh "sudo docker build -t ${DOCKER_IMAGE} ."
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     echo "Deploying using ${DOCKER_COMPOSE_FILE}"
-                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} up -d"
+                    sh "sudo docker-compose -f ${DOCKER_COMPOSE_FILE} up -d"
                 }
             }
         }
