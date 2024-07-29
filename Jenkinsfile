@@ -52,8 +52,20 @@ pipeline {
         stage('Run Tests') {
             steps {
                 script {
-                    // Ajouter des étapes pour exécuter des tests si nécessaire
                     echo "Running tests..."
+                    // Assure-toi d'avoir un script de test pour l'application HTML/CSS
+                    // Exemple: curl pour vérifier que la page principale se charge correctement
+                    sh "docker-compose exec web sh -c 'curl -sS http://localhost:80 | grep -q \"<title>\"'"
+                }
+            }
+        }
+
+        stage('Store Test Reports') {
+            steps {
+                script {
+                    // Stocke les rapports de test si nécessaire
+                    echo "Storing test reports..."
+                    archiveArtifacts artifacts: '**/test-reports/*.xml', allowEmptyArchive: true
                 }
             }
         }
