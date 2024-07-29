@@ -64,7 +64,7 @@ pipeline {
     post {
         always {
             cleanWs()
-            mail to: 'your-email@example.com',
+            mail to: 'vincentgarry@etu-digitalschool.paris',
              subject: "Build ${currentBuild.fullDisplayName}",
              body: "Build ${currentBuild.fullDisplayName} finished with status: ${currentBuild.result}"
         }
