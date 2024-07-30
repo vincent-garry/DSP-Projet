@@ -5,8 +5,8 @@ services:
       - "${APP_PORT}:80"
     environment:
       MYSQL_HOST: db
-      MYSQL_USER: webuser
-      MYSQL_PASSWORD: webpass
+      MYSQL_USER: root
+      MYSQL_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DB: applications
     volumes:
       - ./src:/var/www/html:rw
@@ -19,8 +19,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: applications
-      MYSQL_USER: webuser
-      MYSQL_PASSWORD: webpass
     ports:
       - "${APP_DB_PORT}:3306"
     command: 
