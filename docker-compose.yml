@@ -23,7 +23,9 @@ services:
       MYSQL_ROOT_PASSWORD: DSPProject2024
       MYSQL_DATABASE: applications
     # Removed the ports section
-    command: --init-file /docker-entrypoint-initdb.d/init.sql
+    command: 
+      - --init-file=/docker-entrypoint-initdb.d/init.sql
+      - --bind-address=0.0.0.0
     volumes:
       - db_data:/var/lib/mysql
       - ./src/init.sql:/docker-entrypoint-initdb.d/init.sql
