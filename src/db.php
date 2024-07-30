@@ -1,5 +1,5 @@
 <?php
-$host = 'db';  // This should be the service name of your MySQL container
+$host = 'db_preprod';  // This should be the service name of your MySQL container
 $user = 'root';
 $pass = 'DSPProject2024';
 $db = 'applications';
