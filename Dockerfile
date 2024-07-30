@@ -6,6 +6,11 @@ WORKDIR /root
 # Définir le répertoire de travail dans le conteneur
 COPY ./src/* .
 
+WORKDIR /app
+
+# Copier tous les fichiers du projet dans le conteneur
+COPY . .
+
 # Compiler l'application
 RUN swift build -c release
 
