@@ -53,7 +53,7 @@ pipeline {
             steps {
                 script {
                     echo "Deploying using ${DOCKER_COMPOSE_FILE}"
-                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} up -d"
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} up -d --remove-orphans"
                     
                     // Wait for services to be ready
                     sh "docker-compose -f ${DOCKER_COMPOSE_FILE} run --rm web sleep 10"
