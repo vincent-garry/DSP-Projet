@@ -5,7 +5,7 @@ pipeline {
         // Définir des variables d'environnement
         DOCKER_IMAGE = "${env.BRANCH_NAME}-app"
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
-        APP_PORT = "888" // Ports alloués pour Swit à 988 preprod
+        APP_PORT = "888" // Ports alloués pour Swit 888 à 988 preprod
     }
 
     stages {
