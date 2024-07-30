@@ -7,6 +7,7 @@ pipeline {
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
         APP_PORT = "1393" // Ports alloués pour PHP 1393 à 1493 dev
         APP_DB_PORT = "3307" // Port base de données à modifier à chaque nouvelle application
+        APP_PORT_PHPMYADMIN = "8080"
     }
 
     stages {
