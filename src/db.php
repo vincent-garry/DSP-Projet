@@ -13,7 +13,8 @@ try {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    echo "Connected successfully";
+    // Uncomment the following line for debugging
+    // echo "Connected successfully";
 } catch (Exception $e) {
     die("Connection failed: " . $e->getMessage());
 }

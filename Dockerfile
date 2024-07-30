@@ -1,23 +1,23 @@
-# Utiliser une image de base officielle de PHP avec Apache
 FROM php:7.4-apache
 
-# Copier les fichiers de l'application dans le répertoire de travail du conteneur
-COPY ./src /var/www/html/
+# Copy all PHP files
+COPY ./src/*.php /var/www/html/
 
-# Installer les extensions PHP nécessaires
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Définir les bonnes permissions
 RUN chown -R www-data:www-data /var/www/html \
     && find /var/www/html -type d -exec chmod 755 {} \; \
-    && find /var/www/html -type f -exec chmod 644 {} \; \
-    && chmod -R 755 /var/www/html
+    && find /var/www/html -type f -exec chmod 644 {} \;
 
-# Afficher les permissions pour vérification
+# Debugging: List contents and permissions
 RUN ls -l /var/www/html
 
-# Exposer le port 80 pour le serveur web
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
+
+# Debugging: Show Apache configuration
+RUN apache2ctl -S
+
 EXPOSE 80
 
-# Démarrer Apache en premier plan
 CMD ["apache2-foreground"]

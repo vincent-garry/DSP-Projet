@@ -67,6 +67,9 @@ pipeline {
                     // Wait for services to be ready
                     sh "docker-compose -f ${DOCKER_COMPOSE_FILE} run --rm web sleep 10"
                     
+                    // Check directory content
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web ls -l /var/www/html"
+                    
                     // Check database connection
                     sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web php /var/www/html/db.php"
                 }

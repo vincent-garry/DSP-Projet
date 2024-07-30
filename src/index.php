@@ -1,15 +1,20 @@
 <?php
-include 'db.php';
+require_once 'db.php';
 
-$conn = connectDatabase();
+// Assuming $conn is the database connection from db.php
+if (!$conn) {
+    die("Database connection failed");
+}
 
-$sql = "SELECT id, name FROM users";
-$result = $conn->query($sql);
+// Your existing code to fetch and display data
+$query = "SELECT * FROM your_table_name";
+$result = $conn->query($query);
 
 if ($result->num_rows > 0) {
-    echo "<table><tr><th>ID</th><th>Name</th></tr>";
+    echo "<table>";
+    echo "<tr><th>ID</th><th>Name</th></tr>";
     while($row = $result->fetch_assoc()) {
-        echo "<tr><td>" . $row["id"]. "</td><td>" . $row["name"]. "</td></tr>";
+        echo "<tr><td>".$row["id"]."</td><td>".$row["name"]."</td></tr>";
     }
     echo "</table>";
 } else {
