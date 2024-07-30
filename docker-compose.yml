@@ -9,9 +9,10 @@ services:
       MYSQL_PASSWORD: DSPProject2024
       MYSQL_DB: applications
     volumes:
-      - ./src:/var/www/html/:wr
+      - ./src:/var/www/html:rw
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: mysql:5.7
@@ -25,6 +26,10 @@ services:
     volumes:
       - db_data:/var/lib/mysql
       - ./src/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -37,4 +42,3 @@ services:
 
 volumes:
   db_data:
-  

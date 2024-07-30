@@ -63,6 +63,12 @@ pipeline {
                 script {
                     echo "Deploying using ${DOCKER_COMPOSE_FILE}"
                     sh "docker-compose -f ${DOCKER_COMPOSE_FILE} up -d"
+                    
+                    // Wait for services to be ready
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} run --rm web sleep 10"
+                    
+                    // Check database connection
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web php /var/www/html/db.php"
                 }
             }
         }
@@ -74,16 +80,14 @@ pipeline {
                     
                     // Test if the page contains a <table> tag
                     def curlCommand = "docker-compose exec -T web curl -s http://localhost:80"
-                    
-                    // Run the curl command and store the output
                     def output = sh(script: curlCommand, returnStdout: true).trim()
                     
-                    // Check if the output contains <table>
+                    echo "Full response:"
+                    echo output
+                    
                     if (output.contains("<table>")) {
                         echo "Test passed: <table> found in the response"
                     } else {
-                        echo "Full response:"
-                        echo output
                         error "Test failed: <table> not found in the response"
                     }
                 }
