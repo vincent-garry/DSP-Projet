@@ -71,8 +71,6 @@ pipeline {
             steps {
                 script {
                     echo "Running tests..."
-                    // Attendre que les services soient prêts
-                    sh "sleep 20"
 
                     // Test de réponse HTTP
                     echo "Testing HTTP response..."
