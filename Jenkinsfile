@@ -5,7 +5,7 @@ pipeline {
         // Définir des variables d'environnement
         DOCKER_IMAGE = "${env.BRANCH_NAME}-app"
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
-        APP_PORT = "8000" // Ports alloués pour PHP 1494 à 1594 preprod 
+        APP_PORT = "8001"
         APP_PORT_PHPMYADMIN = "8082"
     }
 
