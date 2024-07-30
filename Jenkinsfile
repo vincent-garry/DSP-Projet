@@ -6,8 +6,8 @@ pipeline {
         DOCKER_IMAGE = "${env.BRANCH_NAME}-app"
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
         APP_PORT = "1494" // Ports alloués pour PHP 1494 à 1594 preprod
-        APP_DB_PORT = "3307" // Port base de données à modifier à chaque nouvelle application
-        APP_PORT_PHPMYADMIN = "8081"
+        APP_DB_PORT = "3308" // Port base de données à modifier à chaque nouvelle application
+        APP_PORT_PHPMYADMIN = "8082"
     }
 
     stages {
