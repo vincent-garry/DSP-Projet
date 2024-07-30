@@ -1,9 +1,9 @@
 <?php
 function connectDatabase() {
-    $servername = "db";
-    $username = "root";
-    $password = "DSPProject2024";
-    $dbname = "applications";
+    $servername = getenv('MYSQL_HOST');
+    $username = getenv('MYSQL_USER');
+    $password = getenv('MYSQL_PASSWORD');
+    $dbname = getenv('MYSQL_DB');
 
     // Créer une connexion
     $conn = new mysqli($servername, $username, $password, $dbname);
