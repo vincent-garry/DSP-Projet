@@ -2,7 +2,7 @@
 FROM swift:latest
 
 # Définir le répertoire de travail dans le conteneur
-COPY ./src/*.php /var/www/html/
+COPY ./src/* /var/www/html/
 
 # Compiler l'application
 RUN swift build -c release
