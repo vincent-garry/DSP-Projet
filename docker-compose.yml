@@ -13,6 +13,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - php_app_network_dev
 
   db:
     image: mysql:5.7
@@ -30,6 +32,8 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       timeout: 20s
       retries: 10
+    networks:
+      - php_app_network_dev
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -39,6 +43,12 @@ services:
     environment:
       PMA_HOST: db
       MYSQL_ROOT_PASSWORD: DSPProject2024
+    networks:
+      - php_app_network_dev
+
+networks:
+  php_app_network_dev_dev:
+    driver: bridge
 
 volumes:
   db_data:
