@@ -1,11 +1,14 @@
-# Utiliser une image Nginx comme base
-FROM nginx:alpine
+# Utiliser l'image officielle Swift comme base
+FROM swift:latest
 
-# Copier les fichiers HTML et CSS dans le répertoire par défaut de Nginx
-COPY ./src /usr/share/nginx/html
+# Définir le répertoire de travail dans le conteneur
+COPY ./src/*.php /var/www/html/
 
-# Exposer le port utilisé par Nginx
+# Compiler l'application
+RUN swift build -c release
+
+# Exposer le port sur lequel l'application s'exécute (à ajuster selon votre application)
 EXPOSE 80
 
-# Nginx s'exécute par défaut en tant que service
-CMD ["nginx", "-g", "daemon off;"]
+# Commande pour exécuter l'application
+CMD [".build/release/swiftApp"]
