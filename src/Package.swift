@@ -7,9 +7,7 @@ let package = Package(
     targets: [
         .executableTarget(
             name: "P3_Battle",
-            dependencies: []),
-        .testTarget(
-            name: "P3_BattleTests",
-            dependencies: ["P3_Battle"]),
+            path: "src"),
+
     ]
 )
