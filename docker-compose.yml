@@ -10,6 +10,7 @@ services:
       MYSQL_DB: applications
     volumes:
       - ./src:/var/www/html:rw
+      - ./src/.htaccess:/var/www/html/.htaccess:ro
     depends_on:
       db_preprod:
         condition: service_healthy
