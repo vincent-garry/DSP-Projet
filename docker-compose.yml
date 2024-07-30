@@ -10,8 +10,9 @@ services:
       MYSQL_DB: applications
     volumes:
       - ./src:/var/www/html:rw
-    depends_on: 
-      - db
+    depends_on:
+      db:
+        condition: service_healthy
 
   db:
     image: mysql:5.7

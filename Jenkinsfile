@@ -7,8 +7,7 @@ pipeline {
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
         APP_PORT = "1595" // Ports alloués pour PHP 1595 à 1695 prod
         APP_DB_PORT = "3307" // Port base de données à modifier à chaque nouvelle application
-        APP_PORT_PHPMYADMIN = "8083"
-        MYSQL_ROOT_PASSWORD = "DSPProject2024"
+        APP_PORT_PHPMYADMIN = "8081"
     }
 
     stages {
@@ -63,9 +62,15 @@ pipeline {
             steps {
                 script {
                     echo "Deploying using ${DOCKER_COMPOSE_FILE}"
-                    sh "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} docker-compose -f ${DOCKER_COMPOSE_FILE} up -d"
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} up -d"
                     
-                    // Check database connection from web container
+                    // Wait for services to be ready
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} run --rm web sleep 10"
+                    
+                    // Check directory content
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web ls -l /var/www/html"
+                    
+                    // Check database connection
                     sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web php /var/www/html/db.php"
                 }
             }
