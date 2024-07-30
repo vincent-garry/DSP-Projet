@@ -2,7 +2,7 @@ services:
   web:
     image: ${DOCKER_IMAGE}
     ports:
-      - "${APP_PORT}:80"
+      - "0.0.0.0:${APP_PORT}:80"
     environment:
       MYSQL_HOST: db_prod
       MYSQL_USER: root
