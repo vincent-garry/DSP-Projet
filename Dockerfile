@@ -4,7 +4,7 @@ FROM swift:latest
 WORKDIR /root
 
 # Définir le répertoire de travail dans le conteneur
-COPY ./src/* .
+COPY ./src/*.* .
 
 # Compiler l'application
 RUN swift build -c release
@@ -13,4 +13,4 @@ RUN swift build -c release
 EXPOSE 80
 
 # Commande pour exécuter l'application
-CMD [".build/release/swiftApp"]
+CMD [".build/release/calculatorApp"]
