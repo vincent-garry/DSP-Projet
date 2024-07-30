@@ -1,11 +1,11 @@
-# Utiliser une image Nginx comme base
-FROM nginx:alpine
+# Utiliser une image de base officielle de PHP avec Apache
+FROM php:7.4-apache
 
-# Copier les fichiers HTML et CSS dans le répertoire par défaut de Nginx
-COPY ./src /usr/share/nginx/html
+# Copier les fichiers de l'application dans le répertoire de travail du conteneur
+COPY ./src /var/www/html/
 
-# Exposer le port utilisé par Nginx
+# Installer les extensions PHP nécessaires
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Exposer le port 80 pour le serveur web
 EXPOSE 80
-
-# Nginx s'exécute par défaut en tant que service
-CMD ["nginx", "-g", "daemon off;"]
