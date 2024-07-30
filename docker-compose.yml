@@ -47,7 +47,7 @@ services:
       - php_app_network_dev
 
 networks:
-  php_app_network_dev_dev:
+  php_app_network_dev:
     driver: bridge
 
 volumes:
