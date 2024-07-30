@@ -71,9 +71,22 @@ pipeline {
             steps {
                 script {
                     echo "Running tests..."
-                    // Assure-toi d'avoir un script de test pour l'application HTML/CSS
-                    // Exemple: curl pour vérifier que la page principale se charge correctement
-                    sh "docker-compose exec web sh -c 'curl -sS http://localhost:80 | grep -q \"<title>\"'"
+                    // Attendre que les services soient prêts
+                    sh "sleep 20"
+
+                    // Test de réponse HTTP
+                    echo "Testing HTTP response..."
+                    sh "docker-compose exec web curl -s -o /dev/null -w '%{http_code}' http://localhost:80 | grep -q '200'"
+
+                    // Test de connexion à la base de données
+                    echo "Testing database connection..."
+                    sh "docker-compose exec web php -r 'include \"db.php\"; \$conn = connectDatabase(); if(\$conn->connect_error) { echo \"Connection failed\"; exit(1); } else { echo \"Connection successful\"; } \$conn->close();'"
+
+                    // Test de contenu de la page
+                    echo "Testing page content..."
+                    sh "docker-compose exec web curl -s http://localhost:80 | grep -q '<table>'"
+                    sh "docker-compose exec web curl -s http://localhost:80 | grep -q 'John Doe'"
+                    sh "docker-compose exec web curl -s http://localhost:80 | grep -q 'Jane Doe'"
                 }
             }
         }
