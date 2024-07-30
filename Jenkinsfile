@@ -62,14 +62,14 @@ pipeline {
             steps {
                 script {
                     echo "Deploying using ${DOCKER_COMPOSE_FILE}"
-                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} up -d"
+                    sh "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD} docker-compose -f ${DOCKER_COMPOSE_FILE} up -d"
                     
                     // Wait for services to be ready
                     sh "docker-compose -f ${DOCKER_COMPOSE_FILE} run --rm web sleep 30"
                     
                     // Check MySQL configuration and permissions
                     sh """
-                        docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T db mysql -uroot -pDSPProject2024 -e "
+                        docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T db mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e "
                             SHOW VARIABLES LIKE 'bind_address';
                             SELECT user, host FROM mysql.user WHERE user = 'webuser';
                             SHOW GRANTS FOR 'webuser'@'%';
