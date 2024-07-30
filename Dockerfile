@@ -9,7 +9,15 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # Définir les bonnes permissions
 RUN chown -R www-data:www-data /var/www/html \
+    && find /var/www/html -type d -exec chmod 755 {} \; \
+    && find /var/www/html -type f -exec chmod 644 {} \; \
     && chmod -R 755 /var/www/html
+
+# Afficher les permissions pour vérification
+RUN ls -l /var/www/html
 
 # Exposer le port 80 pour le serveur web
 EXPOSE 80
+
+# Démarrer Apache en premier plan
+CMD ["apache2-foreground"]
