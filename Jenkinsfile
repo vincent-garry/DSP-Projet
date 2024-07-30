@@ -5,8 +5,7 @@ pipeline {
         // Définir des variables d'environnement
         DOCKER_IMAGE = "${env.BRANCH_NAME}-app"
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
-        APP_PORT = "1494" // Ports alloués pour PHP 1494 à 1594 preprod
-        APP_DB_PORT = "3308" // Port base de données à modifier à chaque nouvelle application
+        APP_PORT = "1494" // Ports alloués pour PHP 1494 à 1594 preprod 
         APP_PORT_PHPMYADMIN = "8082"
     }
 
@@ -38,14 +37,6 @@ pipeline {
                             docker rm $containers
                         fi
                     ''' 
-                    sh '''
-                        # Trouver et arrêter les conteneurs utilisant le port spécifié
-                        containers=$(docker ps -q --filter "publish=${APP_DB_PORT}")
-                        if [ ! -z "$containers" ]; then
-                            docker stop $containers
-                            docker rm $containers
-                        fi
-                    '''
                     sh '''
                         # Trouver et arrêter les conteneurs utilisant le port spécifié
                         containers=$(docker ps -q --filter "publish=${APP_PORT_PHPMYADMIN}")
