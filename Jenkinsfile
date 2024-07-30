@@ -37,7 +37,7 @@ pipeline {
                             docker stop $containers
                             docker rm $containers
                         fi
-                    '''
+                    ''' 
                     sh '''
                         # Trouver et arrêter les conteneurs utilisant le port spécifié
                         containers=$(docker ps -q --filter "publish=${APP_DB_PORT}")
