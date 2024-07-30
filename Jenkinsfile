@@ -73,21 +73,22 @@ pipeline {
                     echo "Running tests..."
                     
                     // Test if the page contains a <table> tag
-                    def curlCommand = "docker-compose exec web sh -c 'curl -s http://localhost:80'"
-                    def grepCommand = "grep -q '<table>'"
+                    def curlCommand = "docker-compose exec -T web curl -s http://localhost:80"
                     
-                    // Run the curl command and grep to check for <table>
-                    def result = sh(script: "${curlCommand} | ${grepCommand}", returnStatus: true)
-        
-                    if (result != 0) {
-                        // If grep fails, print the output to help with debugging
-                        sh "${curlCommand} | head -n 20"  // Print first 20 lines of the output
+                    // Run the curl command and store the output
+                    def output = sh(script: curlCommand, returnStdout: true).trim()
+                    
+                    // Check if the output contains <table>
+                    if (output.contains("<table>")) {
+                        echo "Test passed: <table> found in the response"
+                    } else {
+                        echo "Full response:"
+                        echo output
                         error "Test failed: <table> not found in the response"
                     }
                 }
             }
         }
-
     }
 
     post {
