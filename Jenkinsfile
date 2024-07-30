@@ -70,6 +70,10 @@ pipeline {
                     // Check directory content
                     sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web ls -l /var/www/html"
                     
+                    // Debug Docker network
+                    sh "docker network ls"
+                    sh "docker network inspect \$(docker network ls --filter name=multibranche_pipeline -q)"
+                    
                     // Check database connection
                     sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web php /var/www/html/db.php"
                 }
