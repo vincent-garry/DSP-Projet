@@ -5,9 +5,8 @@ pipeline {
         // Définir des variables d'environnement
         DOCKER_IMAGE = "${env.BRANCH_NAME}-app"
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
-        APP_PORT = "1595" // Ports alloués pour PHP 1595 à 1695 prod
-        APP_DB_PORT = "3307" // Port base de données à modifier à chaque nouvelle application
-        APP_PORT_PHPMYADMIN = "8081"
+        APP_PORT = "8002"
+        APP_PORT_PHPMYADMIN = "8083"
     }
 
     stages {
@@ -40,14 +39,6 @@ pipeline {
                     ''' 
                     sh '''
                         # Trouver et arrêter les conteneurs utilisant le port spécifié
-                        containers=$(docker ps -q --filter "publish=${APP_DB_PORT}")
-                        if [ ! -z "$containers" ]; then
-                            docker stop $containers
-                            docker rm $containers
-                        fi
-                    '''
-                    sh '''
-                        # Trouver et arrêter les conteneurs utilisant le port spécifié
                         containers=$(docker ps -q --filter "publish=${APP_PORT_PHPMYADMIN}")
                         if [ ! -z "$containers" ]; then
                             docker stop $containers
@@ -62,16 +53,18 @@ pipeline {
             steps {
                 script {
                     echo "Deploying using ${DOCKER_COMPOSE_FILE}"
-                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} up -d"
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} up -d --remove-orphans"
                     
-                    // Wait for services to be ready
-                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} run --rm web sleep 10"
+                    // Debug: Check contents of /var/www/html
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web ls -la /var/www/html"
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web cat /var/www/html/index.php"
                     
-                    // Check directory content
-                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web ls -l /var/www/html"
+                    // Debug: Check Apache configuration
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web apache2ctl -M"
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web cat /etc/apache2/sites-enabled/000-default.conf"
                     
-                    // Check database connection
-                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web php /var/www/html/db.php"
+                    // Debug: Try to access index.php
+                    sh "curl -v http://localhost:${APP_PORT}/index.php"
                 }
             }
         }
