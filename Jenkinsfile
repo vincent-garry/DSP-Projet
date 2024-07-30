@@ -63,9 +63,6 @@ pipeline {
                     sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web apache2ctl -M"
                     sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web cat /etc/apache2/sites-enabled/000-default.conf"
                     
-                    // Debug: Check Apache error log
-                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web tail -n 50 /var/log/apache2/error.log"
-                    
                     // Debug: Try to access index.php
                     sh "curl -v http://localhost:${APP_PORT}/index.php"
                 }
