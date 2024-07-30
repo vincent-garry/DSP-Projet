@@ -65,16 +65,18 @@ pipeline {
                     sh "docker-compose -f ${DOCKER_COMPOSE_FILE} up -d"
                     
                     // Wait for services to be ready
-                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} run --rm web sleep 10"
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} run --rm web sleep 30"
                     
-                    // Check directory content
-                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web ls -l /var/www/html"
+                    // Check MySQL configuration and permissions
+                    sh """
+                        docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T db mysql -uroot -pDSPProject2024 -e "
+                            SHOW VARIABLES LIKE 'bind_address';
+                            SELECT user, host FROM mysql.user WHERE user = 'webuser';
+                            SHOW GRANTS FOR 'webuser'@'%';
+                        "
+                    """
                     
-                    // Debug Docker network
-                    sh "docker network ls"
-                    sh "docker network inspect \$(docker network ls --filter name=multibranche_pipeline -q)"
-                    
-                    // Check database connection
+                    // Check database connection from web container
                     sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web php /var/www/html/db.php"
                 }
             }
