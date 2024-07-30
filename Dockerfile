@@ -7,10 +7,10 @@ WORKDIR /root
 COPY ./src/ .
 
 # Installer des outils supplémentaires si nécessaire (e.g., git)
-RUN apk add git
+# RUN apk add git
 
 # Compiler l'application
-RUN swift build -c release -Xlinker -rpath=@executable_path/../lib
+RUN swift build -c release 
 
 # Exposer le port sur lequel l'application s'exécute (à ajuster selon votre application)
 EXPOSE 80
