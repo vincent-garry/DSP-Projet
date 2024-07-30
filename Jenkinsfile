@@ -55,14 +55,19 @@ pipeline {
                     echo "Deploying using ${DOCKER_COMPOSE_FILE}"
                     sh "docker-compose -f ${DOCKER_COMPOSE_FILE} up -d --remove-orphans"
                     
-                    // Wait for services to be ready
-                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} run --rm web sleep 10"
+                    // Debug: Check contents of /var/www/html
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web ls -la /var/www/html"
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web cat /var/www/html/index.php"
                     
-                    // Check directory content
-                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web ls -l /var/www/html"
+                    // Debug: Check Apache configuration
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web apache2ctl -M"
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web cat /etc/apache2/sites-enabled/000-default.conf"
                     
-                    // Check database connection
-                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web php /var/www/html/db.php"
+                    // Debug: Check Apache error log
+                    sh "docker-compose -f ${DOCKER_COMPOSE_FILE} exec -T web tail -n 50 /var/log/apache2/error.log"
+                    
+                    // Debug: Try to access index.php
+                    sh "curl -v http://localhost:${APP_PORT}/index.php"
                 }
             }
         }
