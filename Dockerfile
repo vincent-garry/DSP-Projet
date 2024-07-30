@@ -1,11 +1,23 @@
-# Utiliser une image Nginx comme base
-FROM nginx:alpine
+FROM php:7.4-apache
 
-# Copier les fichiers HTML et CSS dans le répertoire par défaut de Nginx
-COPY ./src /usr/share/nginx/html
+# Copy all PHP files
+COPY ./src/*.php /var/www/html/
 
-# Exposer le port utilisé par Nginx
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+RUN chown -R www-data:www-data /var/www/html \
+    && find /var/www/html -type d -exec chmod 755 {} \; \
+    && find /var/www/html -type f -exec chmod 644 {} \;
+
+# Debugging: List contents and permissions
+RUN ls -l /var/www/html
+
+# Enable Apache mod_rewrite
+RUN a2enmod rewrite
+
+# Debugging: Show Apache configuration
+RUN apache2ctl -S
+
 EXPOSE 80
 
-# Nginx s'exécute par défaut en tant que service
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["apache2-foreground"]
