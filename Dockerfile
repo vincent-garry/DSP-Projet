@@ -16,4 +16,4 @@ RUN swift build -c release -Xlinker -rpath=@executable_path/../lib
 EXPOSE 80
 
 # Commande pour exécuter l'application
-CMD [".build/release/calculatorApp"]
+CMD [".build/release/P3_Battle"]
