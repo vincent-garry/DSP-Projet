@@ -19,8 +19,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: DSPProject2024
       MYSQL_DATABASE: applications
-      MYSQL_USER: root
-      MYSQL_PASSWORD: DSPProject2024
     ports:
       - "${APP_DB_PORT}:3306"
     volumes:
