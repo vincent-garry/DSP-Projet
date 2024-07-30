@@ -23,7 +23,7 @@ try {
     
     echo "Connected successfully to MySQL<br>";
     
-    $result = $conn->query("SELECT * FROM test_table");
+    $result = $conn->query("SELECT * FROM users");
     
     if ($result === false) {
         throw new Exception("Query failed: " . $conn->error);
