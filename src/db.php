@@ -1,8 +1,8 @@
 <?php
-$host = 'db';  // This should be the service name of your MySQL container
-$user = 'root';
-$pass = 'DSPProject2024';
-$db = 'applications';
+$host = getenv("MYSQL_HOST");  // This should be the service name of your MySQL container
+$user = getenv("MYSQL_USER");
+$pass = getenv("MYSQL_PASSWORD");
+$db = getenv("MYSQL_DB");
 
 // Add some debugging
 error_reporting(E_ALL);
