@@ -5,8 +5,8 @@ services:
       - "${APP_PORT}:80"
     environment:
       MYSQL_HOST: db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: DSPProject2024
+      MYSQL_USER: webuser
+      MYSQL_PASSWORD: webpass
       MYSQL_DB: applications
     volumes:
       - ./src:/var/www/html:rw
@@ -20,11 +20,12 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: DSPProject2024
       MYSQL_DATABASE: applications
+      MYSQL_USER: webuser
+      MYSQL_PASSWORD: webpass
     ports:
       - "${APP_DB_PORT}:3306"
     command: 
       - --init-file=/docker-entrypoint-initdb.d/init.sql
-      - --bind-address=0.0.0.0
     volumes:
       - db_data:/var/lib/mysql
       - ./src/init.sql:/docker-entrypoint-initdb.d/init.sql
