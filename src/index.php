@@ -7,8 +7,14 @@ if (!$conn) {
 }
 
 // Your existing code to fetch and display data
-$query = "SELECT * FROM your_table_name";
+$query = "SELECT * FROM users";
 $result = $conn->query($query);
+
+if ($result === false) {
+    die("Error executing query: " . $conn->error);
+}
+
+echo "Query executed successfully. ";
 
 if ($result->num_rows > 0) {
     echo "<table>";
