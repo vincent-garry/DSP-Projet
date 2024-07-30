@@ -21,7 +21,7 @@ services:
       MYSQL_DATABASE: applications
     ports:
       - "${APP_DB_PORT}:3306"
-    command: --init-file /data/application/init.sql
+    command: --init-file /docker-entrypoint-initdb.d/init.sql
     volumes:
       - db_data:/var/lib/mysql
       - ./src/init.sql:/docker-entrypoint-initdb.d/init.sql
