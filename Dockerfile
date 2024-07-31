@@ -19,7 +19,7 @@ RUN echo '<?xml version="1.0" encoding="UTF-8"?>\
     </properties>\
 </project>' > pom.xml
 
-RUN apt-get update && apt-get install -y maven
+RUN apt-get install -y maven
 RUN mvn clean package
 
 FROM openjdk:11-jre-slim
