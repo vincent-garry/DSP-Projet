@@ -18,7 +18,7 @@ COPY . .
 EXPOSE 3000
 
 RUN pwd && ls -l 
-RUN cd ./app && ls -l
+RUN cd src && ls -l 
 
-CMD ["ruby", "./snake-2d/src/app.rb"]
+CMD ["ruby", "./src/app.rb"]
 
