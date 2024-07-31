@@ -11,7 +11,12 @@ import Foundation
 class Team {
 
 
-  var characters = [Character]()
+  var characters: [Character] = []
+  var playerName: String = ""
+    
+  init(playerName: String = "") {
+      self.playerName = playerName
+  }
 
 
   func displayTeam() {
