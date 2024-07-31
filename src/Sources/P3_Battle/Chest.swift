@@ -45,10 +45,24 @@ class Chest {
     print(" ")
   }
 
-  func openChest(character: Character) {
-        let typeWeapon = character.weapon.heal
-        let typeCharacter = character.weapon.heal > 0 ? "heal" : "damage"
+  func createRandomWeapon() -> Weapon {
+        let arrayWeaponDamage = [SwordOfAnduril(), DevilsHammer(), SolarSword(), SwordFishCurved()]
+        let arrayWeaponHeal = [MoonLightGreatSword(), StaffOfFire(), StaffOfNordrassil()]
         
-        print("Your \(character.type) \"\(character.name)\" gets the \"\(character.weapon.name)\" and now can give \(typeWeapon) points of \(typeCharacter) !!!")
+        if Bool.random() {
+            return arrayWeaponDamage.randomElement()!
+        } else {
+            return arrayWeaponHeal.randomElement()!
+        }
+    }
+
+    func openChest(character: Character) {
+        let newWeapon = createRandomWeapon()
+        character.weapon = newWeapon
+        
+        let typeWeapon = newWeapon.heal > 0 ? newWeapon.heal : newWeapon.damage
+        let typeCharacter = newWeapon.heal > 0 ? "heal" : "damage"
+        
+        print("Your \(character.type) \"\(character.name)\" gets the \"\(newWeapon.name)\" and now can give \(typeWeapon) points of \(typeCharacter) !!!")
     }
 }

@@ -8,8 +8,8 @@
 
 import Foundation
 
-class SwordOfAnduril: Weapon {
+class SwordFishCurved: Weapon {
     init() {
-        super.init(damage: 60, heal: 0, type: "Damage", name: "Sword Of Anduril")
+        super.init(damage: 35, heal: 0, type: "Damage", name: "Sword Fish Curved")
     }
 }
