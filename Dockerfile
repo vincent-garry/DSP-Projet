@@ -1,11 +1,20 @@
-# Utiliser une image Nginx comme base
-FROM nginx:alpine
+# Utiliser une image Node.js officielle comme image de base
+FROM node:latest
 
-# Copier les fichiers HTML et CSS dans le répertoire par défaut de Nginx
-COPY ./src /usr/share/nginx/html
+# Créer et définir le répertoire de l'application dans le conteneur
+WORKDIR /app
 
-# Exposer le port utilisé par Nginx
-EXPOSE 80
+# Copier les fichiers package.json et package-lock.json dans le répertoire de travail
+COPY package*.json ./
 
-# Nginx s'exécute par défaut en tant que service
-CMD ["nginx", "-g", "daemon off;"]
+# Installer les dépendances
+RUN npm install
+
+# Copier le code de l'application dans le conteneur
+COPY . .
+
+# Exposer le port sur lequel l'application s'exécute (par exemple, 3000)
+EXPOSE 3000
+
+# Commande pour lancer l'application
+CMD ["node", "src/calculette/server.js"]
