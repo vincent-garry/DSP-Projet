@@ -1,11 +1,24 @@
-# Utiliser une image Nginx comme base
-FROM nginx:alpine
+FROM ruby:latest
 
-# Copier les fichiers HTML et CSS dans le répertoire par défaut de Nginx
-COPY ./src /usr/share/nginx/html
+# Installation des dépendances système
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 
-# Exposer le port utilisé par Nginx
-EXPOSE 80
+WORKDIR /app
 
-# Nginx s'exécute par défaut en tant que service
-CMD ["nginx", "-g", "daemon off;"]
+# Copie des fichiers de dépendances
+COPY Gemfile Gemfile.lock ./
+
+# Installation des gems
+RUN gem install bundler && bundle install
+
+
+# Copie du reste de l'application
+COPY . .
+
+# Précompilation des assets pour la production
+# RUN bundle exec rake assets:precompile
+
+EXPOSE 3000
+
+# Démarrage du serveur Rails
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
