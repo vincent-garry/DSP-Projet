@@ -16,6 +16,6 @@ RUN gem install bundler && bundle install
 COPY . .
 
 EXPOSE 3000
-# "ruby", "src/snake-2d/src/app.rb"
-CMD ["pwd && ls -l"]
+
+CMD ["ruby", "src/snake-2d/src/app.rb"]
 
