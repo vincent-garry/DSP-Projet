@@ -5,7 +5,7 @@ let package = Package(
     name: "P3_Battle",
     dependencies: [],
     targets: [
-        .target(
+        .executableTarget(
             name: "P3_Battle",
             dependencies: [],
             path: "Sources"
