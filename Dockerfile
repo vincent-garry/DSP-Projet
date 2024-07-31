@@ -6,7 +6,9 @@ WORKDIR /app
 
 COPY src/tictactoe1 .
 
-RUN node server/index.js
+RUN npm install
+
+RUN node server/index.js -d
 
 EXPOSE 3000
 
