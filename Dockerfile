@@ -18,5 +18,5 @@ COPY . .
 EXPOSE 3000
 
 # Démarrage du serveur Rails
-CMD ["ruby", "app/Calculatrice-Ruby/calc.rb"]
+CMD ["ruby", "calc.rb"]
 
