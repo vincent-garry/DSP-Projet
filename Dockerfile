@@ -1,11 +1,21 @@
-# Utiliser une image Nginx comme base
-FROM nginx:alpine
+# Use the official Swift image as base
+FROM swift:latest
 
-# Copier les fichiers HTML et CSS dans le répertoire par défaut de Nginx
-COPY ./src /usr/share/nginx/html
+# Set the working directory in the container
+WORKDIR /app
 
-# Exposer le port utilisé par Nginx
+# Copy the entire project into the container
+COPY ./src .
+
+# Install dependencies and build the application
+RUN swift package resolve
+RUN swift build -c release
+
+# Make sure the build directory exists
+RUN mkdir -p /app/.build/release
+
+# Expose the port on which the application runs
 EXPOSE 80
 
-# Nginx s'exécute par défaut en tant que service
-CMD ["nginx", "-g", "daemon off;"]
+# Command to run the application
+CMD ["/app/.build/release/P3_Battle"]
