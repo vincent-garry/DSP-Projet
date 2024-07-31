@@ -20,4 +20,5 @@ COPY src/* .
 EXPOSE 3000
 
 # Command to run the application
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
+# CMD ["npm run start"]
