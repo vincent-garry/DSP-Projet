@@ -8,13 +8,13 @@ app.use(express.static("public"));
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join("app/src/calculette.html")); // Remplacez 'index.html' par votre fichier HTML principal
+  res.sendFile("/app/src/calculette.html"); // Remplacez 'index.html' par votre fichier HTML principal
 });
 app.get("/app.js", (request, response) => {
-  response.sendFile("app/src/app.js");
+  response.sendFile("/app/src/app.js");
 });
 app.get("/app.css", (request, response) => {
-  response.sendFile("app/src/app.css");
+  response.sendFile("/app/src/app.css");
 });
 
 // app.get("/", (req, res) => {
