@@ -7,14 +7,20 @@ WORKDIR /app
 # Copier package.json et package-lock.json
 COPY package*.json ./
 
-# Installer les dépendances
-RUN npm install --only=production
+# Lister les fichiers pour vérifier la copie
+RUN ls -la /app
 
-# Installer nodemon seulement si nécessaire pour le développement
-# RUN npm install -g nodemon
+# Installer les dépendances
+RUN npm install
+
+# Lister les fichiers pour vérifier l'installation des dépendances
+RUN ls -la /app/node_modules
 
 # Copier le reste de votre application
-COPY ./src .
+COPY src .
+
+# Lister les fichiers pour vérifier la copie
+RUN ls -la /app
 
 # Exposer le port sur lequel l'application s'exécute (par exemple, 3000)
 EXPOSE 3000
