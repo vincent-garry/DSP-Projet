@@ -48,7 +48,6 @@ FROM openjdk:11-jre-slim
 RUN apt-get update && apt-get install -y \
     xvfb \
     x11vnc \
-    novnc \
     supervisor \
     fluxbox \
     libxrender1 \
@@ -57,7 +56,16 @@ RUN apt-get update && apt-get install -y \
     fontconfig \
     libfreetype6 \
     fonts-dejavu \
+    wget \
+    unzip \
+    net-tools \
+    vim \
     && rm -rf /var/lib/apt/lists/*
+
+# Installation de noVNC
+RUN mkdir -p /usr/local/novnc \
+    && wget -qO- https://github.com/novnc/noVNC/archive/v1.2.0.tar.gz | tar xz --strip 1 -C /usr/local/novnc \
+    && wget -qO- https://github.com/novnc/websockify/archive/v0.10.0.tar.gz | tar xz --strip 1 -C /usr/local/novnc/utils/websockify
 
 WORKDIR /app
 COPY --from=build /app/target/Jeu_Puissance4-1.0-SNAPSHOT.jar /app/Jeu_Puissance4.jar
@@ -76,12 +84,13 @@ command=/usr/bin/x11vnc -display :99 -forever -shared
 autorestart=true
 
 [program:novnc]
-command=/usr/share/novnc/utils/launch.sh --vnc localhost:5900 --listen 8080
+command=/usr/local/novnc/utils/launch.sh --vnc localhost:5900 --listen 8080
 autorestart=true
 
 [program:fluxbox]
 command=/usr/bin/fluxbox
 autorestart=true
+environment=DISPLAY=:99
 
 [program:java]
 command=java -jar /app/Jeu_Puissance4.jar
