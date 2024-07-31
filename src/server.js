@@ -1,5 +1,4 @@
 const express = require("express");
-const path = require("path"); // Importez le module path
 const cors = require("cors");
 
 const app = express();
