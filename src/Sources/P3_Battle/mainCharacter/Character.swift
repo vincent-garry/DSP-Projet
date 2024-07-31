@@ -14,6 +14,7 @@ class Character {
   let type: String
   var life: Int
   var weapon: Weapon
+  var name: String
 
   
   init(type: String, life: Int, weapon: Weapon) {
