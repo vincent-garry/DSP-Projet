@@ -1,5 +1,5 @@
 # Utiliser une image Node.js officielle comme image de base
-FROM node:latest
+FROM node:14
 
 # Créer et définir le répertoire de l'application dans le conteneur
 WORKDIR /app
@@ -20,4 +20,4 @@ COPY src/* .
 EXPOSE 3000
 
 # Command to run the application
-CMD ["npm", "start"]
+CMD ["node", "server.js"]
