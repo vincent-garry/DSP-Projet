@@ -20,5 +20,5 @@ EXPOSE 3000
 RUN pwd && ls -l 
 RUN cd src && ls -l 
 
-CMD ["ruby", "./src/app.rb"]
+CMD ["ruby", "./src/snake-2d/app.rb"]
 
