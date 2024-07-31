@@ -1,49 +1,12 @@
-FROM openjdk:11-jdk-slim as build
-
-WORKDIR /app
-COPY src/Jeu_Puissance4/Puissance4/sources /app/src/main/java
-
-# Création d'un pom.xml (inchangé)
-RUN echo '<?xml version="1.0" encoding="UTF-8"?>\
-<project xmlns="http://maven.apache.org/POM/4.0.0" \
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" \
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 \
-         http://maven.apache.org/xsd/maven-4.0.0.xsd">\
-    <modelVersion>4.0.0</modelVersion>\
-    <groupId>com.example</groupId>\
-    <artifactId>Jeu_Puissance4</artifactId>\
-    <version>1.0-SNAPSHOT</version>\
-    <properties>\
-        <maven.compiler.source>11</maven.compiler.source>\
-        <maven.compiler.target>11</maven.compiler.target>\
-    </properties>\
-    <build>\
-        <plugins>\
-            <plugin>\
-                <groupId>org.apache.maven.plugins</groupId>\
-                <artifactId>maven-jar-plugin</artifactId>\
-                <version>3.2.0</version>\
-                <configuration>\
-                    <archive>\
-                        <manifest>\
-                            <addClasspath>true</addClasspath>\
-                            <mainClass>sources.Controleur</mainClass>\
-                        </manifest>\
-                    </archive>\
-                </configuration>\
-            </plugin>\
-        </plugins>\
-    </build>\
-</project>' > pom.xml
-
-RUN apt-get update && apt-get install -y maven
-RUN mvn clean package
-
 FROM openjdk:11-jre-slim
 
-# Installation de Xvfb, des dépendances nécessaires et des polices
+# Installation des dépendances nécessaires
 RUN apt-get update && apt-get install -y \
     xvfb \
+    x11vnc \
+    novnc \
+    supervisor \
+    fluxbox \
     libxrender1 \
     libxtst6 \
     libxi6 \
@@ -53,17 +16,35 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-COPY --from=build /app/target/Jeu_Puissance4-1.0-SNAPSHOT.jar /app/Jeu_Puissance4.jar
+COPY target/Jeu_Puissance4-1.0-SNAPSHOT.jar /app/Jeu_Puissance4.jar
 
-# Script pour lancer Xvfb et l'application
-COPY <<EOF /app/start.sh
-#!/bin/sh
-Xvfb :99 -ac &
-export DISPLAY=:99
-java -Djava.awt.headless=false -jar Jeu_Puissance4.jar
+# Configuration de supervisord
+COPY <<EOF /etc/supervisor/conf.d/supervisord.conf
+[supervisord]
+nodaemon=true
+
+[program:xvfb]
+command=/usr/bin/Xvfb :99 -screen 0 1024x768x16
+autorestart=true
+
+[program:x11vnc]
+command=/usr/bin/x11vnc -display :99 -forever -shared
+autorestart=true
+
+[program:novnc]
+command=/usr/share/novnc/utils/launch.sh --vnc localhost:5900 --listen 8080
+autorestart=true
+
+[program:fluxbox]
+command=/usr/bin/fluxbox
+autorestart=true
+
+[program:java]
+command=java -jar /app/Jeu_Puissance4.jar
+autorestart=true
+environment=DISPLAY=:99
 EOF
 
-RUN chmod +x /app/start.sh
-
 EXPOSE 8080
-CMD ["/app/start.sh"]
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
