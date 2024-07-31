@@ -1,5 +1,5 @@
 # Utiliser une image Node.js officielle comme image de base
-FROM node:14
+FROM node:latest
 
 # Créer et définir le répertoire de l'application dans le conteneur
 WORKDIR /app
@@ -8,7 +8,7 @@ WORKDIR /app
 COPY src/package*.json ./
 
 # Installer les dépendances
-RUN npm install
+RUN npm ci
 
 # Copier le reste de votre application
 COPY . .

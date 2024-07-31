@@ -7,7 +7,7 @@ app.use(express.static("public"));
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.sendFile("app/src/calculette.html"); // Remplacez 'index.html' par votre fichier HTML principal
+  res.sendFile("app/src/calculette.html");
 });
 app.get("/app.js", (req, res) => {
   res.sendFile("app/src/app.js");
