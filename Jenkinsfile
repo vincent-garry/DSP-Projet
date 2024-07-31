@@ -55,7 +55,11 @@ pipeline {
                     echo "Running tests..."
                     // Assure-toi d'avoir un script de test pour l'application HTML/CSS
                     // Exemple: curl pour vérifier que la page principale se charge correctement
+<<<<<<< HEAD
                     sh "docker-compose exec web sh -c 'curl -sS http://localhost:80 | grep -q \"<title>\"'"
+=======
+                    // sh "docker-compose exec web sh -c 'curl -sS http://localhost:80 | grep -q \"<title>\"'"
+>>>>>>> swift/dev
                 }
             }
         }
