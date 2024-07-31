@@ -19,7 +19,9 @@ class TeamFactory {
             CaptainMan(name: "Steve Rogers"),
             SuperMan(name: "Clark Kent")
         ]
-        return Team(characters: characters)
+        let team = Team()
+        team.characters = characters
+        return team
     }
   
     
@@ -39,7 +41,7 @@ class TeamFactory {
         }
       } while namePlayer == ""
       
-      guard let team = createTeam() else { return }
+      guard let team = TeamFactory.createTeam() else { return }
       arrayTeams.append(team)
     }
   }

@@ -46,8 +46,18 @@ class Wizard: Character { // type heal
   }
   
   override func attack(character: Character) {
-    print("⛔️ The \(type) \"\(name)\" can't attack but only to heal !")
-  }
+        if character.life > 0 {
+            character.life += weapon.heal
+            print("⚡️ Your \(character.type) \"\(character.name)\" has recovered \(weapon.heal) points of life by the \(weapon.name) of your \(type) \"\(name)\" !⚡️")
+            
+            if character.life >= character.lifeMaxLimit {
+                character.life = character.lifeMaxLimit
+                print("The \(character.type) \"\(character.name)\" has reached its maximum life points : \(character.life)")
+            }
+        } else {
+            print("The \(character.type) \"\(character.name)\" is dead and can't be healed")
+        }
+    }
   
   // display the special power "dispel" to release from a spell
   override func display(index: Int) {
