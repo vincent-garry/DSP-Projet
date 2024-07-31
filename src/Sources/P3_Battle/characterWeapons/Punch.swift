@@ -7,8 +7,8 @@
 //
 
 import Foundation
-class Punch: Weapon { 
-  init() {
-    super.init(damage: 15, type: "coup de point", name: "super point")
-  }
+class Punch: Weapon {
+    init() {
+        super.init(damage: 15, heal: 0, type: "coup de point", name: "super point")
+    }
 }

@@ -12,8 +12,8 @@ class Wizard: Character { // type heal
   
   //MARK: - Inits
   init(name: String) {
-    super.init(type: "Wizard", life: 70, weapon: Scepter.init(), name: name, isBlocked: false)    
-  }
+        super.init(type: "Wizard", life: 70, weapon: Scepter(), name: name)
+    }
   
   //MARK: - Methodes
   func heal(character: Character) {

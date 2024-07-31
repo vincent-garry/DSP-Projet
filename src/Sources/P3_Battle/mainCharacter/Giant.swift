@@ -8,10 +8,8 @@
 
 import Foundation
 
-class Giant: Character { // type attack
-  
-  //MARK: - Init
-  init(name: String) {
-    super.init(type: "Giant", life: 120, weapon: Mace.init(), name: name, isBlocked: false)
-  }
+class Giant: Character {
+    init(name: String) {
+        super.init(type: "Giant", life: 120, weapon: Mace(), name: name)
+    }
 }

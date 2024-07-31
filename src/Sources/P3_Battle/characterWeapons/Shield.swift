@@ -7,8 +7,8 @@
 //
 
 import Foundation
-class Shield: Weapon { // type attack
-  init() {
-    super.init(damage: 20, type: "Bouclier", name: "Bouclier-vibra")
-  }
+class Shield: Weapon {
+    init() {
+        super.init(damage: 20, heal: 0, type: "Bouclier", name: "Bouclier-vibra")
+    }
 }

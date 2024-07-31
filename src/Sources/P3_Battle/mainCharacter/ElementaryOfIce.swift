@@ -12,8 +12,8 @@ class ElementaryOfIce: Character { // type attack
   
   //MARK: - Init
   init(name: String) {
-    super.init(type: "Elementary Of Ice", life: 80, weapon: BatOfIce.init(), name: name, isBlocked: false)
-  }
+        super.init(type: "Elementary Of Ice", life: 80, weapon: BatOfIce(), name: name)
+    }
   
   
   //MARK: - Methodes

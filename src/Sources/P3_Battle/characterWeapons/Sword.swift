@@ -8,8 +8,8 @@
 
 import Foundation
 
-class Sword: Weapon { // type attack
-  init() {
-    super.init(damage: 10, heal: 0, nameWeapon: "Sword")
-  }
+class Sword: Weapon {
+    init() {
+        super.init(damage: 10, heal: 0, type: "Damage", name: "Sword")
+    }
 }

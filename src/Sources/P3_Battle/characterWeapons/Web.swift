@@ -7,8 +7,8 @@
 //
 
 import Foundation
-class Web: Weapon { // type attack
-  init() {
-    super.init(damage: 30, type: "toile-araigné", name: "Toile")
-  }
+class Web: Weapon {
+    init() {
+        super.init(damage: 30, heal: 0, type: "toile-araigné", name: "Toile")
+    }
 }

@@ -9,8 +9,8 @@
 import Foundation
 
 class Weapon {
-    let damage: Int
-    let heal: Int
+    var damage: Int
+    var heal: Int
     let type: String
     let name: String
     

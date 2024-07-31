@@ -8,7 +8,7 @@
 
 import Foundation
 class CaptainMan: Character {
-  init() {
-    super.init(type: "CaptainMan", life: 40, weapon: Shield.init())
-  }
+    init(name: String) {
+        super.init(type: "CaptainMan", life: 40, weapon: Shield(), name: name)
+    }
 }

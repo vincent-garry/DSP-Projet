@@ -8,8 +8,8 @@
 
 import Foundation
 
-class BatOfIce: Weapon { // type heal
-  init() {
-    super.init(damage: 15, heal: 0, nameWeapon: "Bat Of Ice")
-  }
+class BatOfIce: Weapon {
+    init() {
+        super.init(damage: 15, heal: 0, type: "Damage", name: "Bat Of Ice")
+    }
 }
