@@ -4,7 +4,7 @@ FROM swift:latest
 WORKDIR /root
 
 # Définir le répertoire de travail dans le conteneur
-COPY ./src/ .
+COPY ./src/* .
 
 # Installer des outils supplémentaires si nécessaire (e.g., git)
 # RUN apk add git
