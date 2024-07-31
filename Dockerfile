@@ -41,8 +41,16 @@ RUN mvn clean package
 
 FROM openjdk:11-jre-slim
 
-# Installation de Xvfb et des dépendances nécessaires
-RUN apt-get update && apt-get install -y xvfb libxrender1 libxtst6 libxi6
+# Installation de Xvfb, des dépendances nécessaires et des polices
+RUN apt-get update && apt-get install -y \
+    xvfb \
+    libxrender1 \
+    libxtst6 \
+    libxi6 \
+    fontconfig \
+    libfreetype6 \
+    fonts-dejavu \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 COPY --from=build /app/target/Jeu_Puissance4-1.0-SNAPSHOT.jar /app/Jeu_Puissance4.jar
@@ -52,7 +60,7 @@ COPY <<EOF /app/start.sh
 #!/bin/sh
 Xvfb :99 -ac &
 export DISPLAY=:99
-java -jar Jeu_Puissance4.jar
+java -Djava.awt.headless=false -jar Jeu_Puissance4.jar
 EOF
 
 RUN chmod +x /app/start.sh
