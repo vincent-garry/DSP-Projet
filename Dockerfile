@@ -16,5 +16,6 @@ COPY . .
 # Exposer le port sur lequel l'application s'exécute (par exemple, 3000)
 EXPOSE 3000
 
+RUN pwd && ls -l
 # Commande pour lancer l'application
 CMD ["node", "src/server.js"]
