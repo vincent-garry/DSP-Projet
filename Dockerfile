@@ -6,7 +6,7 @@ RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 WORKDIR /app
 
 # Copie des fichiers de dépendances
-COPY ./src/Gemfile ./src/Gemfile.lock ./
+COPY ./src/ .
 
 # Installation des gems
 RUN gem install bundler && bundle install
@@ -18,5 +18,5 @@ COPY . .
 EXPOSE 3000
 
 # Démarrage du serveur Rails
-CMD ["ruby", "Calc.rb"]
+CMD ["ruby", "app/snake-2d/src/app.rb"]
 
