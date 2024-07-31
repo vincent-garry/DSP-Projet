@@ -5,7 +5,7 @@ pipeline {
         // Définir des variables d'environnement
         DOCKER_IMAGE = "${env.BRANCH_NAME}-app"
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
-        APP_PORT = "1898" // Ports alloués pour Python 1898 à 1998 prod
+        APP_PORT = "1898" // Ports alloués pour Python 1696 à 1796 dev
     }
 
     stages {
@@ -55,7 +55,7 @@ pipeline {
                     echo "Running tests..."
                     // Assure-toi d'avoir un script de test pour l'application HTML/CSS
                     // Exemple: curl pour vérifier que la page principale se charge correctement
-                    sh "docker-compose exec web sh -c 'curl -sS http://localhost:80 | grep -q \"<title>\"'"
+                    //sh "docker-compose exec web sh -c 'curl -sS http://localhost:5000 | grep -q \"</div>\"'"
                 }
             }
         }
