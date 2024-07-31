@@ -60,12 +60,16 @@ RUN apt-get update && apt-get install -y \
     unzip \
     net-tools \
     vim \
+    python3 \
+    python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-# Installation de noVNC
+# Installation de noVNC via pip
+RUN pip3 install numpy websockify
 RUN mkdir -p /usr/local/novnc \
-    && wget -qO- https://github.com/novnc/noVNC/archive/v1.2.0.tar.gz | tar xz --strip 1 -C /usr/local/novnc \
-    && wget -qO- https://github.com/novnc/websockify/archive/v0.10.0.tar.gz | tar xz --strip 1 -C /usr/local/novnc/utils/websockify
+    && wget -qO- https://github.com/novnc/noVNC/archive/v1.2.0.zip | busybox unzip -qd /usr/local/novnc - \
+    && mv /usr/local/novnc/noVNC-1.2.0/* /usr/local/novnc/ \
+    && rm -rf /usr/local/novnc/noVNC-1.2.0
 
 WORKDIR /app
 COPY --from=build /app/target/Jeu_Puissance4-1.0-SNAPSHOT.jar /app/Jeu_Puissance4.jar
@@ -84,7 +88,7 @@ command=/usr/bin/x11vnc -display :99 -forever -shared
 autorestart=true
 
 [program:novnc]
-command=/usr/local/novnc/utils/launch.sh --vnc localhost:5900 --listen 8080
+command=/usr/local/novnc/utils/novnc_proxy --vnc localhost:5900 --listen 8080
 autorestart=true
 
 [program:fluxbox]
