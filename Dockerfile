@@ -4,11 +4,12 @@ FROM node:latest
 # Créer et définir le répertoire de l'application dans le conteneur
 WORKDIR /app
 
+
 # Copier les fichiers de votre application dans le conteneur
 COPY src/* .
 
 # Installer les dépendances
-RUN npm ci
+RUN npm i express && npm i
 
 # Copier le reste de votre application
 # COPY . .
