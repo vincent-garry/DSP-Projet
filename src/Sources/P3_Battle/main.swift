@@ -2,33 +2,30 @@ import Foundation
 import Vapor
 
 // Initialisation du jeu
-private let game = Game()
+let game = Game()
 
 // Configuration du serveur Vapor
 let app = try Application(.detect())
 defer { app.shutdown() }
 
 // Route pour démarrer le jeu
-app.get("start") { req -> String in
-    // Capture la sortie standard
-    let pipe = Pipe()
-    let savedStandardOutput = FileHandle.standardOutput
-    FileHandle.standardOutput = pipe
-    
-    // Exécute le jeu
-    game.start()
-    
-    // Récupère la sortie
-    FileHandle.standardOutput = savedStandardOutput
-    let data = pipe.fileHandleForReading.readDataToEndOfFile()
-    let output = String(data: data, encoding: .utf8) ?? "Impossible de lire la sortie du jeu"
-    
-    return output
+app.get("start") { req in
+    return game.start(req: req)
 }
 
-// Route par défaut
-app.get { req in
-    return "Bienvenue dans P3_Battle! Utilisez /start pour lancer le jeu."
+// Route pour créer les équipes
+app.get("create-teams") { req in
+    return game.createTeams(req: req)
+}
+
+// Route pour effectuer un tour de bataille
+app.get("battle") { req in
+    return game.battle(req: req)
+}
+
+// Route pour voir le statut du jeu
+app.get("status") { req in
+    return game.status(req: req)
 }
 
 // Démarrage du serveur
