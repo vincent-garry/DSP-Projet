@@ -9,11 +9,9 @@
 import Foundation
 
 class TeamFactory {
-  
-  var arrayTeams = [Team]()
-  
- 
-  private func createTeam() -> Team {
+    var arrayTeams = [Team]()
+    
+    func createTeam() -> Team {
         let characters: [Character] = [
             SpiderMan(name: "Peter Parker"),
             CaptainMan(name: "Steve Rogers"),
@@ -23,27 +21,25 @@ class TeamFactory {
         team.characters = characters
         return team
     }
-  
     
-
-  func createTeams() {
-    let numberOfTeams = 2
-    
-    for i in 0..<numberOfTeams {
-      var namePlayer = ""
-      print("")
-      print("=============================")
-      print("Entrer le nom du joueur \(i+1) : ")
-      print("=============================")
-      repeat {
-        if let data = readLine() {
-          namePlayer = data
+    func createTeams() {
+        let numberOfTeams = 2
+        
+        for i in 0..<numberOfTeams {
+            var namePlayer = ""
+            print("")
+            print("=============================")
+            print("Entrer le nom du joueur \(i+1) : ")
+            print("=============================")
+            repeat {
+                if let data = readLine() {
+                    namePlayer = data
+                }
+            } while namePlayer == ""
+            
+            let team = createTeam()
+            team.playerName = namePlayer
+            arrayTeams.append(team)
         }
-      } while namePlayer == ""
-      
-      guard let team = TeamFactory.createTeam() else { return }
-      arrayTeams.append(team)
     }
-  }
-  
 }
