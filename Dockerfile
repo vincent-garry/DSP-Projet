@@ -1,24 +1,15 @@
-# Utiliser une image Node.js officielle comme image de base
-FROM node:14
+FROM node:18
 
-# Créer et définir le répertoire de l'application dans le conteneur
 WORKDIR /app
 
+COPY src/package*.json ./
 
-# Copier les fichiers de votre application dans le conteneur
-COPY src/* .
-
-# Installer les dépendances
-RUN npm install -g nodemon
-RUN npm install -g express
 RUN npm install
 
-# # Copier le reste de votre application
-# COPY src/* .
+COPY --chown=node:node . .
 
-# Exposer le port sur lequel l'application s'exécute (par exemple, 3000)
 EXPOSE 3000
 
-# Command to run the application
-# CMD ["npm", "start"]
-CMD ["npx", "nodemon", "server.js"]
+ENV HOST=0.0.0.0 PORT=3000
+
+CMD ["node", "index.js"]

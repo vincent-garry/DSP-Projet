@@ -1,31 +1,19 @@
-const express = require("express");
-const cors = require("cors");
+const Fastify = require("fastify");
+const fastify = Fastify({ logger: true });
 
-const app = express();
-// Routes
-// app.use(express.static("./"));
-app.use(cors());
+const PORT = parseInt(process.env.PORT, 10) || 3000;
+const HOST = process.env.HOST || "localhost";
 
-app.get("/", (req, res) => {
-  res.sendFile("/app/src/calculette.html");
-});
-app.get("/app.js", (req, res) => {
-  res.sendFile("/app/src/app.js");
-});
-app.get("/app.css", (req, res) => {
-  res.sendFile("/app/src/app.css");
+fastify.get("/", async (request, reply) => {
+  reply
+    .code(200)
+    .header("Content-Type", "application/json; charset=utf-8")
+    .send({ site: "sfeir.dev", article: "build node js app with docker" });
 });
 
-// app.get("/", (req, res) => {
-// res.sendFile("C:/xampp/php/www/DSP-projet/src/calculette.html"); // Remplacez 'index.html' par votre fichier HTML principal
-// });
-// app.get("/app.js", (request, response) => {
-//   response.sendFile("C:/xampp/php/www/DSP-projet/src/app.js");
-// });
-// app.get("/app.css", (request, response) => {
-//   response.sendFile("C:/xampp/php/www/DSP-projet/src/app.css");
-// });
-
-https: app.listen(3000, () => {
-  console.log(`Server listening on port 3000`);
+fastify.listen({ host: HOST, port: PORT }, (err, address) => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
 });
