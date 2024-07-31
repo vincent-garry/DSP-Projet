@@ -5,13 +5,10 @@ FROM node:latest
 WORKDIR /app
 
 # Copier les fichiers package.json et package-lock.json dans le répertoire de travail
-COPY src/package*.json ./
+COPY src/ .
 
 # Installer les dépendances
 RUN npm install 
-
-# Copier le code de l'application dans le conteneur
-COPY src/ .
 
 # Exposer le port sur lequel l'application s'exécute (par exemple, 3000)
 EXPOSE 3000
