@@ -3,7 +3,7 @@ const cors = require("cors");
 
 const app = express();
 // Routes
-app.use(express.static("public"));
+app.use(express.static("./"));
 app.use(cors());
 
 app.get("/", (req, res) => {
