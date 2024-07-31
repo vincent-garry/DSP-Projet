@@ -11,13 +11,13 @@ import Foundation
 class TeamFactory {
     var arrayTeams = [Team]()
     
-    func createTeam() -> Team {
+    func createTeam(playerName: String) -> Team {
         let characters: [Character] = [
             SpiderMan(name: "Peter Parker"),
             CaptainMan(name: "Steve Rogers"),
             SuperMan(name: "Clark Kent")
         ]
-        let team = Team()
+        let team = Team(playerName: playerName)
         team.characters = characters
         return team
     }
@@ -37,8 +37,7 @@ class TeamFactory {
                 }
             } while namePlayer == ""
             
-            let team = createTeam()
-            team.playerName = namePlayer
+            let team = createTeam(playerName: namePlayer)
             arrayTeams.append(team)
         }
     }
