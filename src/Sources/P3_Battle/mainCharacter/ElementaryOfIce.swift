@@ -61,13 +61,13 @@ class ElementaryOfIce: Character { // type attack
   
   // display if the character is of type attack
   private func displayWeaponDamaged(character: Character, typeCharacter: String) {
-    print("💢 The \(character.weapon.nameWeapon) of the \(character.type) \"\(character.name)\" has been damaged by the \(type) \"\(name)\" and and loses 5 points of \(typeCharacter) !")
+    print("💢 The \(character.weapon.name) of the \(character.type) \"\(character.name)\" has been damaged by the \(type) \"\(name)\" and and loses 5 points of \(typeCharacter) !")
     print("---------------------------------------------------------------------------------------------------------")
   }
   
   // display if the character is of type heal
   private func displayWeaponNoEffect(character: Character, typeCharacter: String) {
-    print("🚫 No effect : The \(character.weapon.nameWeapon) of the \(character.type) \"\(character.name)\" has only 5 points of \(typeCharacter) left and can't lose more.")
+    print("🚫 No effect : The \(character.weapon.name) of the \(character.type) \"\(character.name)\" has only 5 points of \(typeCharacter) left and can't lose more.")
     print("--------------------------------------------------------------------------------------------------------")
   }
 } // END class ElementaryOfIce
