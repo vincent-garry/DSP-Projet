@@ -17,6 +17,8 @@ COPY . .
 
 EXPOSE 3000
 
-# Démarrage du serveur Rails
-CMD ["ruby", "app/snake-2d/src/app.rb"]
+RUN pwd && ls -l 
+RUN cd ./app && ls -l
+
+CMD ["ruby", "./snake-2d/src/app.rb"]
 
