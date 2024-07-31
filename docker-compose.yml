@@ -1,6 +1,7 @@
 services:
   web:
     image: ${DOCKER_IMAGE}
+    command: npm start
     ports:
       - "${APP_PORT}:3000"
     volumes:

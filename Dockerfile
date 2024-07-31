@@ -13,8 +13,8 @@ RUN npm install -g nodemon
 RUN npm install -g express
 RUN npm install
 
-# Copier le reste de votre application
-COPY src/* .
+# # Copier le reste de votre application
+# COPY src/* .
 
 # Exposer le port sur lequel l'application s'exécute (par exemple, 3000)
 EXPOSE 3000
