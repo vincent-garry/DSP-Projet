@@ -3,7 +3,7 @@ FROM openjdk:11-jdk-slim as build
 WORKDIR /app
 COPY src/Jeu_Puissance4/Puissance4/sources /app/src/main/java
 
-# Création d'un pom.xml avec configuration du plugin JAR
+# Création d'un pom.xml avec configuration du plugin JAR et spécification correcte de la classe principale
 RUN echo '<?xml version="1.0" encoding="UTF-8"?>\
 <project xmlns="http://maven.apache.org/POM/4.0.0" \
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" \
@@ -27,7 +27,7 @@ RUN echo '<?xml version="1.0" encoding="UTF-8"?>\
                     <archive>\
                         <manifest>\
                             <addClasspath>true</addClasspath>\
-                            <mainClass>Controleur</mainClass>\
+                            <mainClass>sources.Controleur</mainClass>\
                         </manifest>\
                     </archive>\
                 </configuration>\
