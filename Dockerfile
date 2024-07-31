@@ -1,17 +1,24 @@
 # Use an official Python runtime as a parent image
 FROM python:3.9-slim
 
-# Set the working directory in the container
-WORKDIR /app
+# Create a non-root user
+RUN useradd -m myuser
 
-# Copy the requirements file into the container at /app
-COPY src/requirements.txt /app/
+# Create and set the working directory
+RUN mkdir -p /home/myuser/app && chown -R myuser:myuser /home/myuser/app
+WORKDIR /home/myuser/app
+
+# Copy the requirements file
+COPY --chown=myuser:myuser src/requirements.txt .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application
-COPY src /app
+COPY --chown=myuser:myuser src .
+
+# Switch to the non-root user
+USER myuser
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000

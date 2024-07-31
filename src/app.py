@@ -1,5 +1,9 @@
+import os
 from flask import Flask, render_template, jsonify, request
 import numpy as np
+
+# Ensure we're in the correct directory
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 app = Flask(__name__)
 
