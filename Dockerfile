@@ -1,19 +1,20 @@
-# Utiliser l'image officielle Swift comme base
+# Use the official Swift image as base
 FROM swift:latest
 
-WORKDIR /root
+# Set the working directory in the container
+WORKDIR /app
 
-# Définir le répertoire de travail dans le conteneur
-COPY ./src /root
+# Copy the entire project into the container
+COPY ./src .
 
-# Installer des outils supplémentaires si nécessaire (e.g., git)
-# RUN apk add git
+# Build the application
+RUN swift build -c release
 
-# Compiler l'application
-RUN swift build -c release 
+# Make sure the build directory exists
+RUN mkdir -p /app/.build/release
 
-# Exposer le port sur lequel l'application s'exécute (à ajuster selon votre application)
+# Expose the port on which the application runs (adjust if necessary)
 EXPOSE 80
 
-# Commande pour exécuter l'application
-CMD ["/root/.build/release/P3_Battle"]
+# Command to run the application
+CMD ["/app/.build/release/P3_Battle"]
