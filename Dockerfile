@@ -9,7 +9,8 @@ WORKDIR /app
 COPY src/* .
 
 # Installer les dépendances
-RUN npm i express && npm i
+RUN npm i express
+RUN npm i
 
 # Copier le reste de votre application
 # COPY . .
