@@ -5,7 +5,7 @@ FROM node:latest
 WORKDIR /app
 
 # Copier les fichiers de votre application dans le conteneur
-COPY package*.json ./
+COPY src/package*.json ./
 
 # Installer les dépendances
 RUN npm install
