@@ -27,8 +27,8 @@ loop do
     puts "0. Quitter"
   
     print "Choisissez une opération (0-23) : "
-    print "Fin du programme !"
-    break
+    # print "Fin du programme !"
+    # break
     choice = gets.to_i
   
     case choice
