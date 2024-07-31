@@ -7,7 +7,8 @@ let package = Package(
     targets: [
         .target(
             name: "P3_Battle",
-            dependencies: []
+            dependencies: [],
+            path: "Sources"
         ),
 
     ]
