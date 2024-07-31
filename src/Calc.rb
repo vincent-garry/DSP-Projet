@@ -27,7 +27,7 @@ loop do
     puts "0. Quitter"
   
     print "Choisissez une opération (0-23) : "
-    choice = gets.to_i
+    choice = 0
   
     case choice
     when 1..5
