@@ -5,3 +5,6 @@ services:
       - "${APP_PORT}:3000"
     volumes:
       - ./src:/app
+    command: npm start
+    environment:
+      - NODE_ENV=development

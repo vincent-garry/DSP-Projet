@@ -7,13 +7,13 @@ app.use(express.static("public"));
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.sendFile("./app/src/calculette.html");
+  res.sendFile("/app/src/calculette.html");
 });
 app.get("/app.js", (req, res) => {
-  res.sendFile("./app/src/app.js");
+  res.sendFile("/app/src/app.js");
 });
 app.get("/app.css", (req, res) => {
-  res.sendFile("./app/src/app.css");
+  res.sendFile("/app/src/app.css");
 });
 
 // app.get("/", (req, res) => {

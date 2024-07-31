@@ -8,10 +8,10 @@ WORKDIR /app
 COPY src/package*.json ./
 
 # Installer les dépendances
-RUN npm install
+RUN npm install --only=production
 
-# Installer nodemon globalement (si nécessaire)
-RUN npm install -g nodemon
+# Installer nodemon seulement si nécessaire pour le développement
+# RUN npm install -g nodemon
 
 # Copier le reste de votre application
 COPY src .
@@ -19,5 +19,5 @@ COPY src .
 # Exposer le port sur lequel l'application s'exécute (par exemple, 3000)
 EXPOSE 3000
 
-# Command to run the application
+# Commande pour lancer l'application
 CMD ["npm", "start"]
