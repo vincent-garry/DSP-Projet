@@ -16,4 +16,4 @@ RUN swift build -c release
 EXPOSE 80
 
 # Commande pour exécuter l'application
-CMD [".build/release/P3_Battle"]
+CMD ["/root/.build/release/P3_Battle"]
