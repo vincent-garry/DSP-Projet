@@ -67,9 +67,10 @@ RUN apt-get update && apt-get install -y \
 # Installation de noVNC via pip
 RUN pip3 install numpy websockify
 RUN mkdir -p /usr/local/novnc \
-    && wget -qO- https://github.com/novnc/noVNC/archive/v1.2.0.zip | busybox unzip -qd /usr/local/novnc - \
+    && wget -qO- https://github.com/novnc/noVNC/archive/v1.2.0.zip > novnc.zip \
+    && unzip -q novnc.zip -d /usr/local/novnc \
     && mv /usr/local/novnc/noVNC-1.2.0/* /usr/local/novnc/ \
-    && rm -rf /usr/local/novnc/noVNC-1.2.0
+    && rm -rf /usr/local/novnc/noVNC-1.2.0 novnc.zip
 
 WORKDIR /app
 COPY --from=build /app/target/Jeu_Puissance4-1.0-SNAPSHOT.jar /app/Jeu_Puissance4.jar
