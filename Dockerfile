@@ -1,11 +1,16 @@
-# Utiliser une image Nginx comme base
-FROM nginx:alpine
+FROM openjdk:11-jdk-slim as build
 
-# Copier les fichiers HTML et CSS dans le répertoire par défaut de Nginx
-COPY ./src /usr/share/nginx/html
+WORKDIR /app
+COPY src /app/src
+COPY pom.xml /app
 
-# Exposer le port utilisé par Nginx
-EXPOSE 80
+RUN apt-get update && apt-get install -y maven
+RUN mvn clean package
 
-# Nginx s'exécute par défaut en tant que service
-CMD ["nginx", "-g", "daemon off;"]
+FROM openjdk:11-jre-slim
+
+WORKDIR /app
+COPY --from=build /app/target/Jeu_Puissance4.jar /app/Jeu_Puissance4.jar
+
+EXPOSE 8080
+CMD ["java", "-jar", "Jeu_Puissance4.jar"]
