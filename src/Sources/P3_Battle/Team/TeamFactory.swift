@@ -13,7 +13,7 @@ class TeamFactory {
   var arrayTeams = [Team]()
   
  
-  static func createTeam() -> Team {
+  private func createTeam() -> Team {
         let characters: [Character] = [
             SpiderMan(name: "Peter Parker"),
             CaptainMan(name: "Steve Rogers"),
