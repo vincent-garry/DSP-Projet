@@ -6,7 +6,7 @@ RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 WORKDIR /app
 
 # Copie des fichiers de dépendances
-COPY ./src/ .
+COPY ./src/snake-2d/Gemfile ./src/snake-2d/Gemfile.lock ./
 
 # Installation des gems
 RUN gem install bundler && bundle install
