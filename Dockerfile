@@ -8,10 +8,10 @@ WORKDIR /app
 COPY src/package*.json ./
 
 # Installer les dépendances
-RUN npm install
+RUN npm install 
 
 # Copier le code de l'application dans le conteneur
-COPY . .
+COPY src/ .
 
 # Exposer le port sur lequel l'application s'exécute (par exemple, 3000)
 EXPOSE 3000
