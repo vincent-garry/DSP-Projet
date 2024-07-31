@@ -9,58 +9,52 @@
 import Foundation
 
 class Character {
-  
-
-  let type: String
-  var life: Int
-  var weapon: Weapon
-  var name: String
-
-  
-  init(type: String, life: Int, weapon: Weapon) {
-    self.type = type
-    self.life = life
-    self.weapon = weapon
-  }
-  
-
-  private func receive(damage: Int) {
-    self.life -= damage
-    if self.life <= 0 {
-      self.life = 0
+    let type: String
+    var life: Int
+    var weapon: Weapon
+    let name: String
+    
+    init(type: String, life: Int, weapon: Weapon, name: String) {
+        self.type = type
+        self.life = life
+        self.weapon = weapon
+        self.name = name
     }
-  }
-  
-  func attack(character: Character) {
-    if life > 0 {
-      if character.life > 0 {
-        character.receive(damage: weapon.damage)
-        print("\n**************************************")
-        print("\(type) utilise \(weapon.name) pour attaquer")
-        print("\(character.type) perds \(weapon.damage) de point de vie")
-        print("**************************************")
-          
-        if character.life <= 0 {
-          print("Le personnage \(character.type) n'a plus de point de vie ")
+    
+    private func receive(damage: Int) {
+        self.life -= damage
+        if self.life <= 0 {
+            self.life = 0
         }
-          
-      } else {
-        print("\n**************************************")
-        print("Le personnage \(character.type)  n'a plus de point de vie !")
-        print("**************************************")
-      }
-    } else {
-      print("\n**************************************")
-      print(" Le personnage \(type) ne peut pas lançer d'attaque car il est mort")
-      print("**************************************")
     }
-  }
-  
-
-  func display(index: Int) {
-    print(" ")
-    print("\(index) - \(type)  - Points de vie: \(life) - Arme : \(weapon.name) - Dégats : \(weapon.damage)")
-  }
+    
+    func attack(character: Character) {
+        if life > 0 {
+            if character.life > 0 {
+                character.receive(damage: weapon.damage)
+                print("\n**************************************")
+                print("\(type) utilise \(weapon.name) pour attaquer")
+                print("\(character.type) perds \(weapon.damage) de point de vie")
+                print("**************************************")
+                
+                if character.life <= 0 {
+                    print("Le personnage \(character.type) n'a plus de point de vie ")
+                }
+                
+            } else {
+                print("\n**************************************")
+                print("Le personnage \(character.type)  n'a plus de point de vie !")
+                print("**************************************")
+            }
+        } else {
+            print("\n**************************************")
+            print(" Le personnage \(type) ne peut pas lançer d'attaque car il est mort")
+            print("**************************************")
+        }
+    }
+    
+    func display(index: Int) {
+        print(" ")
+        print("\(index) - \(type)  - Points de vie: \(life) - Arme : \(weapon.name) - Dégats : \(weapon.damage)")
+    }
 }
-
-

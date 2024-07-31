@@ -8,10 +8,9 @@
 
 import Foundation
 
-class Dwarf: Character { // type attack
-  
-  //MARK: - Init
-  init(name: String) {
-    super.init(type: "Dwarf", life: 60, weapon: Axe.init(), name: name, isBlocked: false)
-  }
+class Dwarf: Character {
+    init(name: String) {
+        let weapon = Axe()
+        super.init(type: "Dwarf", life: 60, weapon: weapon, name: name)
+    }
 }
