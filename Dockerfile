@@ -8,7 +8,7 @@ COPY src/tictactoe1 .
 
 RUN npm install
 
-RUN node server/index.js -d
+RUN node server/index.js &
 
 EXPOSE 3000
 
