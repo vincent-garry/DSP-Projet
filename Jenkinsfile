@@ -5,7 +5,7 @@ pipeline {
         // Définir des variables d'environnement
         DOCKER_IMAGE = "${env.BRANCH_NAME}-app"
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
-        APP_PORT = "1999" // Ports alloués pour Ruby 1999 à 2099 dev
+        APP_PORT = "2201" // Ports alloués pour Ruby 2201 à 2301 prod
     }
 
     stages {

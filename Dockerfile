@@ -17,5 +17,6 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["ruby", "app.rb"]
+# Démarrage du serveur Rails
+CMD ["ruby", "Calc.rb"]
 
