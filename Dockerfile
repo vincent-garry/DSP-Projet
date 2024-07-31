@@ -6,10 +6,9 @@ RUN apt-get update -qq && apt-get install -y nodejs postgresql-client libsdl2-de
 WORKDIR /app
 
 # Copie des fichiers de dépendances
-COPY ./src/ ./
+COPY ./src/snake-2d/Gemfile ./src/snake-2d/Gemfile.lock ./
 
 # Installation des gems
-RUN pwd && cd src/
 RUN gem install bundler && bundle install
 
 
@@ -18,5 +17,5 @@ COPY . .
 
 EXPOSE 3000
 
-CMD ["ruby", "src/snake-2d/src/app.rb"]
+CMD ["ruby", "app.rb"]
 
