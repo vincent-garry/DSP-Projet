@@ -27,14 +27,14 @@ loop do
     puts "0. Quitter"
   
     print "Choisissez une opération (0-23) : "
-    choice = gets.chomp.to_i
+    choice = gets.to_i
   
     case choice
     when 1..5
       print "Entrez le premier nombre : "
-      num1 = gets.chomp.to_f
+      num1 = gets.to_f
       print "Entrez le deuxième nombre : "
-      num2 = gets.chomp.to_f
+      num2 = gets.to_f
   
       result = case choice
                when 1
@@ -52,13 +52,13 @@ loop do
       puts "Résultat : #{result}"
     when 6
       print "Entrez le nombre : "
-      num = gets.chomp.to_f
+      num = gets.to_f
   
       result = Math.log(num)
       puts "Résultat : #{result}"
     when 7..9
       print "Entrez l'angle en radians : "
-      angle = gets.chomp.to_f
+      angle = gets.to_f
   
       result = case choice
                when 7
@@ -75,7 +75,7 @@ loop do
       puts "Je suis ravi de vous informer que vous avez gagné... absolument rien !"
     when 11
       print "Entrez la fonction : "
-      function = gets.chomp
+      function = gets
   
       # Calculer la dérivée de la fonction
       derivative = # Code pour calculer la dérivée de la fonction
@@ -83,9 +83,9 @@ loop do
       puts "La dérivée de la fonction #{function} est #{derivative}"
     when 12
       print "Entrez le coefficient a : "
-      a = gets.chomp.to_f
+      a = gets.to_f
       print "Entrez le coefficient b : "
-      b = gets.chomp.to_f
+      b = gets.to_f
   
       # Résoudre l'équation du premier degré ax + b = 0
       if a == 0
@@ -96,11 +96,11 @@ loop do
       end
     when 13
       print "Entrez le coefficient a : "
-      a = gets.chomp.to_f
+      a = gets.to_f
       print "Entrez le coefficient b : "
-      b = gets.chomp.to_f
+      b = gets.to_f
       print "Entrez le coefficient c : "
-      c = gets.chomp.to_f
+      c = gets.to_f
   
       # Résoudre l'équation du deuxième degré ax^2 + bx + c = 0
       discriminant = b**2 - 4 * a * c
@@ -117,9 +117,9 @@ loop do
       end
     when 14
       print "Entrez la valeur : "
-      value = gets.chomp.to_f
+      value = gets.to_f
       print "Entrez le pourcentage : "
-      percentage = gets.chomp.to_f
+      percentage = gets.to_f
   
       result = (value * percentage) / 100
       puts "Le pourcentage de #{value} est #{result}"
@@ -130,20 +130,20 @@ loop do
         puts "2. Degrés Celsius en degrés Fahrenheit"
         puts "0. Retour au menu précédent"
         print "Choisissez une conversion (0-2) : "
-        conversion_choice = gets.chomp.to_i
+        conversion_choice = gets.to_i
   
         case conversion_choice
         when 0
           break
         when 1
           print "Entrez la valeur en kilomètres : "
-          km = gets.chomp.to_f
+          km = gets.to_f
   
           miles = km * 0.621371
           puts "#{km} kilomètres équivalent à #{miles} miles."
         when 2
           print "Entrez la valeur en degrés Celsius : "
-          celsius = gets.chomp.to_f
+          celsius = gets.to_f
   
           fahrenheit = (celsius * 9/5) + 32
           puts "#{celsius} degrés Celsius équivalent à #{fahrenheit} degrés Fahrenheit."
@@ -154,11 +154,11 @@ loop do
     when 16
       loop do
         print "Entrez le montant du prêt : "
-        principal = gets.chomp.to_f
+        principal = gets.to_f
         print "Entrez le taux d'intérêt annuel en pourcentage : "
-        interest_rate = gets.chomp.to_f
+        interest_rate = gets.to_f
         print "Entrez le nombre de mois : "
-        months = gets.chomp.to_i
+        months = gets.to_i
   
         monthly_interest_rate = interest_rate / 100 / 12
         numerator = monthly_interest_rate * (1 + monthly_interest_rate)**months
@@ -173,12 +173,12 @@ loop do
         puts "Le montant total des intérêts payés est de : #{total_interest.round(2)} $"
   
         print "Effectuer un autre calcul de prêt ou d'hypothèque ? (Oui/Non) : "
-        answer = gets.chomp.downcase
+        answer = gets.downcase
         break unless answer == "oui"
       end
     when 17
       print "Entrez la durée en secondes : "
-      seconds = gets.chomp.to_i
+      seconds = gets.to_i
   
       minutes = seconds / 60
       hours = minutes / 60
@@ -192,7 +192,7 @@ loop do
     when 18
       loop do
         print "Entrez les données séparées par des espaces : "
-        data = gets.chomp.split.map(&:to_f)
+        data = gets.split.map(&:to_f)
   
         sum = data.sum
         mean = sum / data.length
@@ -211,15 +211,15 @@ loop do
         puts "Maximum : #{max}"
   
         print "Effectuer un autre calcul de statistiques ? (Oui/Non) : "
-        answer = gets.chomp.downcase
+        answer = gets.downcase
         break unless answer == "oui"
       end
     when 19
       loop do
         print "Entrez la première fraction (sous la forme a/b) : "
-        fraction1 = gets.chomp.split("/").map(&:to_i)
+        fraction1 = gets.split("/").map(&:to_i)
         print "Entrez la deuxième fraction (sous la forme a/b) : "
-        fraction2 = gets.chomp.split("/").map(&:to_i)
+        fraction2 = gets.split("/").map(&:to_i)
   
         numerator1, denominator1 = fraction1
         numerator2, denominator2 = fraction2
@@ -235,13 +235,13 @@ loop do
         puts "Division : #{result_division.join("/")}"
   
         print "Effectuer une autre opération avec des fractions ? (Oui/Non) : "
-        answer = gets.chomp.downcase
+        answer = gets.downcase
         break unless answer == "oui"
       end
     when 20
       loop do
         print "Entrez la taille des matrices (lignes colonnes) : "
-        rows, columns = gets.chomp.split.map(&:to_i)
+        rows, columns = gets.split.map(&:to_i)
   
         matrix1 = []
         matrix2 = []
@@ -249,13 +249,13 @@ loop do
         puts "Entrez les éléments de la première matrice :"
         rows.times do |i|
           print "Ligne #{i + 1} : "
-          matrix1 << gets.chomp.split.map(&:to_i)
+          matrix1 << gets.split.map(&:to_i)
         end
   
         puts "Entrez les éléments de la deuxième matrice :"
         rows.times do |i|
           print "Ligne #{i + 1} : "
-          matrix2 << gets.chomp.split.map(&:to_i)
+          matrix2 << gets.split.map(&:to_i)
         end
   
         result_addition = []
@@ -302,17 +302,17 @@ loop do
         end
   
         print "Effectuer une autre opération avec des matrices ? (Oui/Non) : "
-        answer = gets.chomp.downcase
+        answer = gets.downcase
         break unless answer == "oui"
       end
     when 21
       loop do
         print "Entrez le montant en devise de départ : "
-        amount = gets.chomp.to_f
+        amount = gets.to_f
         print "Entrez la devise de départ : "
-        currency_from = gets.chomp.upcase
+        currency_from = gets.upcase
         print "Entrez la devise de destination : "
-        currency_to = gets.chomp.upcase
+        currency_to = gets.upcase
   
         rates = {
           "USD_TO_EUR" => 0.84,
@@ -326,7 +326,7 @@ loop do
         puts "#{amount} #{currency_from} équivalent à #{converted_amount} #{currency_to}"
   
         print "Effectuer une autre conversion monétaire ? (Oui/Non) : "
-        answer = gets.chomp.downcase
+        answer = gets.downcase
         break unless answer == "oui"
       end
     when 22
@@ -338,14 +338,14 @@ loop do
         puts "4. Cercle"
         puts "0. Retour au menu précédent"
         print "Choisissez une forme (0-4) : "
-        shape_choice = gets.chomp.to_i
+        shape_choice = gets.to_i
   
         case shape_choice
         when 0
           break
         when 1
           print "Entrez la longueur du côté : "
-          side_length = gets.chomp.to_f
+          side_length = gets.to_f
   
           area = side_length**2
           perimeter = 4 * side_length
@@ -354,9 +354,9 @@ loop do
           puts "Périmètre du carré : #{perimeter}"
         when 2
           print "Entrez la longueur : "
-          length = gets.chomp.to_f
+          length = gets.to_f
           print "Entrez la largeur : "
-          width = gets.chomp.to_f
+          width = gets.to_f
   
           area = length * width
           perimeter = 2 * (length + width)
@@ -365,15 +365,15 @@ loop do
           puts "Périmètre du rectangle : #{perimeter}"
         when 3
           print "Entrez la base : "
-          base = gets.chomp.to_f
+          base = gets.to_f
           print "Entrez la hauteur : "
-          height = gets.chomp.to_f
+          height = gets.to_f
   
           area = 0.5 * base * height
           puts "Aire du triangle : #{area}"
         when 4
           print "Entrez le rayon : "
-          radius = gets.chomp.to_f
+          radius = gets.to_f
   
           area = Math::PI * radius**2
           circumference = 2 * Math::PI * radius
@@ -387,13 +387,13 @@ loop do
     when 23
       loop do
         print "Entrez la valeur de la résistance en ohms (Ω) : "
-        resistance = gets.chomp.to_f
+        resistance = gets.to_f
   
         print "Entrez la valeur de la tension en volts (V) : "
-        voltage = gets.chomp.to_f
+        voltage = gets.to_f
   
         print "Entrez la valeur de l'intensité en ampères (A) : "
-        current = gets.chomp.to_f
+        current = gets.to_f
   
         case resistance
         when 0
@@ -410,7 +410,7 @@ loop do
         end
   
         print "Effectuer une autre opération avec la résistance ? (Oui/Non) : "
-        answer = gets.chomp.downcase
+        answer = gets.downcase
         break unless answer == "oui"
       end
     when 0
