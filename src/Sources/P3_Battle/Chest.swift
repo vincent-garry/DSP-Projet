@@ -40,7 +40,7 @@ class Chest {
   private func displayChest(character: Character, typeCharacter: String, typeWeapon: Int) {
     print("@@@@@@@@@@@===========================------------------===========================@@@@@@@@@@@")
     print("☀️☀️☀️ Congratulations ! You discover a chest 📦 and you get a new weapon ⚔️ : ☀️☀️☀️")
-    print("Your \(character.type) \"\(character.name)\" gets the \"\(character.weapon.nameWeapon)\" and now can give \(typeWeapon) points of \(typeCharacter) !!!")
+    print("Your \(character.type) \"\(character.name)\" gets the \"\(character.weapon.name)\" and now can give \(typeWeapon) points of \(typeCharacter) !!!")
     print("@@@@@@@@@@@===========================------------------===========================@@@@@@@@@@@")
     print(" ")
   }
