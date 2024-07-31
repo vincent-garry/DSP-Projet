@@ -9,15 +9,15 @@
 import Foundation
 
 class Weapon {
-
-  var damage: Int
-  var type: String
-  let name: String
-  
-
-  init(damage: Int, type: String, name: String) {
-    self.damage = damage
-    self.type = type
-    self.name = name
-  }
+    let damage: Int
+    let heal: Int
+    let type: String
+    let name: String
+    
+    init(damage: Int, heal: Int, type: String, name: String) {
+        self.damage = damage
+        self.heal = heal
+        self.type = type
+        self.name = name
+    }
 }

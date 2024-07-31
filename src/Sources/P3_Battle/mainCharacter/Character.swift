@@ -13,12 +13,16 @@ class Character {
     var life: Int
     var weapon: Weapon
     let name: String
+    var isBlocked: Bool
+    let lifeMaxLimit: Int
     
     init(type: String, life: Int, weapon: Weapon, name: String) {
         self.type = type
         self.life = life
         self.weapon = weapon
         self.name = name
+        self.isBlocked = false
+        self.lifeMaxLimit = life
     }
     
     private func receive(damage: Int) {

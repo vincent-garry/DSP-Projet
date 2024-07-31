@@ -44,4 +44,11 @@ class Chest {
     print("@@@@@@@@@@@===========================------------------===========================@@@@@@@@@@@")
     print(" ")
   }
+
+  func openChest(character: Character) {
+        let typeWeapon = character.weapon.heal
+        let typeCharacter = character.weapon.heal > 0 ? "heal" : "damage"
+        
+        print("Your \(character.type) \"\(character.name)\" gets the \"\(character.weapon.name)\" and now can give \(typeWeapon) points of \(typeCharacter) !!!")
+    }
 }
