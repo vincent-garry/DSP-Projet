@@ -5,7 +5,7 @@ FROM node:latest
 WORKDIR /app
 
 # Copier les fichiers package.json et package-lock.json dans le répertoire de travail
-COPY package*.json ./
+COPY src/package*.json ./
 
 # Installer les dépendances
 RUN npm install
@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Commande pour lancer l'application
-CMD ["node", "src/calculette/server.js"]
+CMD ["node", "server.js"]
