@@ -1,5 +1,5 @@
 # Utiliser une image Node.js officielle comme image de base
-FROM node:latest
+FROM node:14
 
 # Créer et définir le répertoire de l'application dans le conteneur
 WORKDIR /app
@@ -16,6 +16,5 @@ COPY . .
 # Exposer le port sur lequel l'application s'exécute (par exemple, 3000)
 EXPOSE 3000
 
-RUN npm run src/server.js
-# Commande pour lancer l'application
-# CMD ["node", "src/server.js"]
+# Command to run the application
+CMD ["node", "src/server.js"]
