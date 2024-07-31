@@ -3,7 +3,7 @@ FROM openjdk:11-jdk-slim as build
 WORKDIR /app
 COPY src/Jeu_Puissance4/Puissance4/sources /app/src/main/java
 
-# Création d'un pom.xml basique
+# Création d'un pom.xml avec configuration du plugin JAR
 RUN echo '<?xml version="1.0" encoding="UTF-8"?>\
 <project xmlns="http://maven.apache.org/POM/4.0.0" \
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" \
@@ -17,6 +17,23 @@ RUN echo '<?xml version="1.0" encoding="UTF-8"?>\
         <maven.compiler.source>11</maven.compiler.source>\
         <maven.compiler.target>11</maven.compiler.target>\
     </properties>\
+    <build>\
+        <plugins>\
+            <plugin>\
+                <groupId>org.apache.maven.plugins</groupId>\
+                <artifactId>maven-jar-plugin</artifactId>\
+                <version>3.2.0</version>\
+                <configuration>\
+                    <archive>\
+                        <manifest>\
+                            <addClasspath>true</addClasspath>\
+                            <mainClass>Controleur</mainClass>\
+                        </manifest>\
+                    </archive>\
+                </configuration>\
+            </plugin>\
+        </plugins>\
+    </build>\
 </project>' > pom.xml
 
 RUN apt-get update && apt-get install -y maven
