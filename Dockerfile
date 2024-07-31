@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 3000
 
 # Commande pour lancer l'application
-CMD ["node", "src/calculette/server.js"]
+CMD ["node", "app/calculette/server.js"]
