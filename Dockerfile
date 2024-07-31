@@ -1,11 +1,21 @@
-# Utiliser une image Nginx comme base
-FROM nginx:alpine
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
 
-# Copier les fichiers HTML et CSS dans le répertoire par défaut de Nginx
-COPY ./src /usr/share/nginx/html
+# Set the working directory in the container
+WORKDIR /app
 
-# Exposer le port utilisé par Nginx
-EXPOSE 80
+# Copy the current directory contents into the container at /app
+COPY ./src /app
 
-# Nginx s'exécute par défaut en tant que service
-CMD ["nginx", "-g", "daemon off;"]
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Make port 5000 available to the world outside this container
+EXPOSE 5000
+
+# Define environment variable
+ENV FLASK_APP=app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
+# Run app.py when the container launches
+CMD ["flask", "run"]
