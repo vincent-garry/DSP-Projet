@@ -5,9 +5,10 @@ let package = Package(
     name: "P3_Battle",
     dependencies: [],
     targets: [
-        .executableTarget(
+        .target(
             name: "P3_Battle",
-            path: "src"),
+            dependencies: []
+        ),
 
     ]
 )
