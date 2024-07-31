@@ -9,6 +9,8 @@ COPY src/ .
 
 # Installer les dépendances
 RUN npm install 
+RUN npm install express@^4.17.1
+
 
 # Exposer le port sur lequel l'application s'exécute (par exemple, 3000)
 EXPOSE 3000
