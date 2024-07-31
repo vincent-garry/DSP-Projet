@@ -1,7 +1,7 @@
 FROM ruby:latest
 
 # Installation des dépendances système
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
 
 WORKDIR /app
 
