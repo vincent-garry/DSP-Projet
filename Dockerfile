@@ -3,7 +3,7 @@ FROM openjdk:11-jdk-slim as build
 WORKDIR /app
 COPY src/Jeu_Puissance4/Puissance4/sources /app/src/main/java
 
-# Création d'un pom.xml avec configuration du plugin JAR et spécification correcte de la classe principale
+# Création d'un pom.xml (inchangé)
 RUN echo '<?xml version="1.0" encoding="UTF-8"?>\
 <project xmlns="http://maven.apache.org/POM/4.0.0" \
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" \
@@ -41,8 +41,21 @@ RUN mvn clean package
 
 FROM openjdk:11-jre-slim
 
+# Installation de Xvfb et des dépendances nécessaires
+RUN apt-get update && apt-get install -y xvfb libxrender1 libxtst6 libxi6
+
 WORKDIR /app
 COPY --from=build /app/target/Jeu_Puissance4-1.0-SNAPSHOT.jar /app/Jeu_Puissance4.jar
 
+# Script pour lancer Xvfb et l'application
+COPY <<EOF /app/start.sh
+#!/bin/sh
+Xvfb :99 -ac &
+export DISPLAY=:99
+java -jar Jeu_Puissance4.jar
+EOF
+
+RUN chmod +x /app/start.sh
+
 EXPOSE 8080
-CMD ["java", "-jar", "Jeu_Puissance4.jar"]
+CMD ["/app/start.sh"]
