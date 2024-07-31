@@ -15,11 +15,8 @@ RUN gem install bundler && bundle install
 # Copie du reste de l'application
 COPY . .
 
-# Précompilation des assets pour la production
-# RUN bundle exec rake assets:precompile
-
 EXPOSE 3000
 
 # Démarrage du serveur Rails
-CMD ["ruby", "calc.rb"]
+CMD ["ruby", "app/Calculatrice-Ruby/calc.rb"]
 
