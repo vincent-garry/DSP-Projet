@@ -6,7 +6,7 @@ COPY src/package*.json ./
 
 RUN npm ci
 
-COPY --chown=node:node . .
+COPY src/* .
 
 EXPOSE 3000
 
