@@ -21,4 +21,4 @@ EXPOSE 3000
 
 # Command to run the application
 # CMD ["npm", "start"]
-CMD ["node", "server.js"]
+CMD ["npx", "nodemon", "server.js"]
