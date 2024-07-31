@@ -5,13 +5,13 @@ FROM node:latest
 WORKDIR /app
 
 # Copier les fichiers de votre application dans le conteneur
-COPY src/package*.json ./
+COPY src/* .
 
 # Installer les dépendances
 RUN npm ci
 
 # Copier le reste de votre application
-COPY . .
+# COPY . .
 
 # Exposer le port sur lequel l'application s'exécute (par exemple, 3000)
 EXPOSE 3000
