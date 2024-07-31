@@ -4,7 +4,9 @@ FROM node:14
 # Créer et définir le répertoire de l'application dans le conteneur
 WORKDIR /app
 
-COPY src .
+COPY src/tictactoe1 .
+
+RUN node server/index.js
 
 EXPOSE 3000
 
