@@ -1,11 +1,23 @@
-# Utiliser une image Nginx comme base
-FROM nginx:alpine
+# Utiliser une image Node.js officielle comme image de base
+FROM node:14
 
-# Copier les fichiers HTML et CSS dans le répertoire par défaut de Nginx
-COPY ./src /usr/share/nginx/html
+# Créer et définir le répertoire de l'application dans le conteneur
+WORKDIR /app
 
-# Exposer le port utilisé par Nginx
-EXPOSE 80
+# Copier package.json et package-lock.json
+COPY src/package*.json ./
 
-# Nginx s'exécute par défaut en tant que service
-CMD ["nginx", "-g", "daemon off;"]
+# Installer les dépendances
+RUN npm install
+
+# Installer nodemon globalement (si nécessaire)
+RUN npm install -g nodemon
+
+# Copier le reste de votre application
+COPY src .
+
+# Exposer le port sur lequel l'application s'exécute (par exemple, 3000)
+EXPOSE 3000
+
+# Command to run the application
+CMD ["npm", "start"]
