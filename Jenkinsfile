@@ -3,9 +3,11 @@ pipeline {
 
     environment {
         // Définir des variables d'environnement
-        DOCKER_IMAGE = "${env.BRANCH_NAME}-app"
+        DOCKER_IMAGE = "vincentgarry/${env.BRANCH_NAME}-app"
+        DOCKER_TAG = 'prod' // Changez ce tag selon la version que vous voulez
+        DOCKER_CREDENTIALS_ID = 'dockerhub-credentials' // ID des credentials Docker Hub stockés dans Jenkins
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
-        APP_PORT = "1292" // Ports alloués pour NodeJS 1292 à 1392 prod
+        APP_PORT = "1292" // Ports alloués pour NodeJS 1090 à 1190 dev
     }
 
     stages {
@@ -18,8 +20,21 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    echo "Building Docker image: ${DOCKER_IMAGE}"
-                    sh "docker build -t ${DOCKER_IMAGE} ."
+                    echo "Building Docker image: ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                    sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                }
+            }
+        }
+        stage('Push Docker Image') {
+            steps {
+                script {
+                    // Se connecter à Docker Hub
+                    withDockerRegistry([credentialsId: "${DOCKER_CREDENTIALS_ID}", url: 'https://index.docker.io/v1/']) {
+                        // Taguer l'image
+                        sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} vincentgarry/${DOCKER_IMAGE}:${DOCKER_TAG}"
+                        // Pousser l'image
+                        sh "docker push vincentgarry/${DOCKER_IMAGE}:${DOCKER_TAG}"
+                    }
                 }
             }
         }
