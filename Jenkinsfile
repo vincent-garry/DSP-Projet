@@ -3,7 +3,8 @@ pipeline {
 
     environment {
         // Définir des variables d'environnement
-        DOCKER_IMAGE = "vincentgarry/${env.BRANCH_NAME}-app"
+        TYPE = "html-css"
+        DOCKER_IMAGE = "vincentgarry/${TYPE}-app"
         DOCKER_TAG = 'preprod' // Changez ce tag selon la version que vous voulez
         DOCKER_CREDENTIALS_ID = 'dockerhub-credentials' // ID des credentials Docker Hub stockés dans Jenkins
         DOCKER_COMPOSE_FILE = "docker-compose.yml"
@@ -31,9 +32,9 @@ pipeline {
                     // Se connecter à Docker Hub
                     withDockerRegistry([credentialsId: "${DOCKER_CREDENTIALS_ID}", url: 'https://index.docker.io/v1/']) {
                         // Taguer l'image
-                        sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} vincentgarry/${DOCKER_IMAGE}:${DOCKER_TAG}"
+                        sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:${DOCKER_TAG}"
                         // Pousser l'image
-                        sh "docker push vincentgarry/${DOCKER_IMAGE}:${DOCKER_TAG}"
+                        sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
                     }
                 }
             }
